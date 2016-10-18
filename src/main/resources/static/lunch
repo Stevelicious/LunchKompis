@@ -3,6 +3,8 @@
     {
       "title" : "dejt",
       "date" : "10/11",
+      "isPublic" : false,
+      "place" : "dovas",
       "users" : [
         "user1", "user2"
       ]
@@ -10,6 +12,8 @@
     {
       "title" : "business",
       "date" : "02/12",
+      "isPublic" : true,
+      "place" : "pong",
       "users" : [
         "user9", "user2"
       ]
@@ -17,6 +21,8 @@
     {
       "title" : "breakup",
       "date" : "08/11",
+      "isPublic" : true,
+      "place" : "mcdonalds",
       "users" : [
         "user1", "user6"
       ]
