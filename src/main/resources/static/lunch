@@ -1,0 +1,25 @@
+{
+  "lunches" : [
+    {
+      "title" : "dejt",
+      "date" : "10/11",
+      "users" : [
+        "user1", "user2"
+      ]
+    },
+    {
+      "title" : "business",
+      "date" : "02/12",
+      "users" : [
+        "user9", "user2"
+      ]
+    },
+    {
+      "title" : "breakup",
+      "date" : "08/11",
+      "users" : [
+        "user1", "user6"
+      ]
+    }
+  ]
+}
