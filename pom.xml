@@ -73,6 +73,10 @@
 			<systemPath>${basedir}/lib/sqljdbc42.jar</systemPath>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -80,6 +84,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- NOTE: To get auto-restarts in IntelliJ when saving a file, make sure the "Make project
+                        automatically" option is enabled (Preferences -> Build -> Compiler) -->
+					<fork>true</fork><!-- Auto restart for web server -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,3 +1,5 @@
+package com.awa;
+
 import javax.persistence.*;
 
 @Entity
