@@ -1,36 +1,36 @@
-/**
- * Created by Roberto Angius on 2016-10-18.
- */
+import javax.persistence.*;
+
+@Entity
+@Table
 public class User {
-    private long userID;
-    private String firstName;
-    private String lastName;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long userid;
+    private String firstname;
+    private String lastname;
     private String email;
     private String nickname;
     private String password;
 
-    public long getUserID() {
-        return userID;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setUserID(long userID) {
-        this.userID = userID;
+    public long getUserid() {
+        return userid;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
