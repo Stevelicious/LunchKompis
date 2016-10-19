@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Hello Spring Security</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
-    </head>
-    <body>
-        <div th:substituteby="index::logout"></div>
-        <div ng-app="awa">
-            <div ng-controller="appCtrl as vm">{{vm.message}}</div>
 
+<head>
+	<title>Hello Spring Security</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+</head>
+
+<body>
+	<div th:substituteby="index::logout"></div>
+	<h1>This is a secured page!</h1>
+	<p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+	<div ng-app="awa">
+		<div ng-controller="appCtrl as vm">{{vm.message}}</div>
+        <div>
+            {{vm.dummyData}}
         </div>
-        <h1>This is a secured page!</h1>
-        <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+	</div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-        <script src="/scripts/app.controller.js"></script>
-        <script src="/scripts/app.js"></script>
-    </body>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="/scripts/repo/repo.service.js"></script>
+    <script src="/scripts/repo/repo.module.js"></script>
+	<script src="/scripts/app.controller.js"></script>
+	<script src="/scripts/app.js"></script>
+</body>
+
 </html>
