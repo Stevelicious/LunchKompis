@@ -1,9 +1,7 @@
 package com.awa;
 
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
