@@ -77,12 +77,12 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userid=" + userid +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", email='" + email + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", password='" + password + '\'' +
-                "}\n";
+                "userid = " + userid +
+                ", firstname = '" + firstname +
+                "', lastname = '" + lastname +
+                "', email = '" + email +
+                "', nickname = '" + nickname +
+                "', password = '" + password +
+                "'}\n";
     }
 }

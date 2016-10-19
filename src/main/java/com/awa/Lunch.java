@@ -76,14 +76,6 @@ public class Lunch {
 		this.place = place;
 	}
 	
-//	public List<User> getUsers() {
-//		return users;
-//	}
-	
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
-	
 	public Map<User, String> getUsers() {
 		return users;
 	}
@@ -92,17 +84,15 @@ public class Lunch {
 		users.put(u, status);
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("ID=%d, Title=%s%n",lunchid,title));
-		for (Map.Entry e :
-				users.entrySet()) {
+		sb.append(String.format("ID = %d, Title = %s%n", lunchid, title));
+		for (Map.Entry e : users.entrySet()) {
 			User user = (User) e.getKey();
-			sb.append(String.format("UserID = %d; %s%n",user.getUserid(),e.getValue()));
+			sb.append(String.format("\tUserID = %d; %s%n", user.getUserid(), e.getValue()));
 		}
+		
 		
 		return sb.toString();
 	}
