@@ -1,27 +1,31 @@
 package com.awa;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Steven Hu on 2016-10-18.
  */
+
+@Entity
+@Table
 public class Lunch {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	long lunchid;
 	String title;
 	LocalDate date;
 	LocalTime time;
 	boolean isPublic;
 	String place;
-	List<User> users;
+	List<User> users = new ArrayList<>();
 	
 	public long getLunchid() {
 		return lunchid;
-	}
-	
-	public void setLunchid(long lunchid) {
-		this.lunchid = lunchid;
 	}
 	
 	public String getTitle() {
