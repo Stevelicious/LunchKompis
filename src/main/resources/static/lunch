@@ -3,6 +3,7 @@
     {
       "title" : "dejt",
       "date" : "10/11",
+      "time" : "11:30",
       "isPublic" : false,
       "place" : "dovas",
       "users" : [
@@ -12,6 +13,7 @@
     {
       "title" : "business",
       "date" : "02/12",
+      "time" : "12:00",
       "isPublic" : true,
       "place" : "pong",
       "users" : [
@@ -21,6 +23,7 @@
     {
       "title" : "breakup",
       "date" : "08/11",
+      "time" : "11:00",
       "isPublic" : true,
       "place" : "mcdonalds",
       "users" : [

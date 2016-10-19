@@ -14,8 +14,9 @@ public class User {
     private String email;
     private String nickname;
     private String password;
-    
-    
+
+    public User() {
+    }
 
     public User(String firstname, String lastname, String email, String nickname, String password) {
         this.firstname = firstname;
