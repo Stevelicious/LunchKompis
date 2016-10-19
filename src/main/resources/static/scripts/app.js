@@ -1,2 +1,2 @@
-angular.module("awa", [])
-    .controller("appCtrl", [awa.controllers.AppController]);
+angular.module('lunchApp', [])
+.controller('groupCtrl', ['$scope', '$http', lunchApp.controllers.AppController]);
