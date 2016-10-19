@@ -2,8 +2,8 @@ package com.awa;
 
 import javax.persistence.*;
 
-@Entity
-@Table
+//@Entity
+//@Table
 public class User {
 
     @Id

@@ -10,8 +10,8 @@ import java.util.List;
  * Created by Steven Hu on 2016-10-18.
  */
 
-@Entity
-@Table
+//@Entity
+//@Table
 public class Lunch {
 	
 	@Id
