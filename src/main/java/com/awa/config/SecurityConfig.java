@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-					.antMatchers("/**").permitAll()	// ingen säkerhet
-					// .antMatchers("/css/**", "/index").permitAll() //utkomenterad vid utveckling
+					// .antMatchers("/**").permitAll()	// ingen säkerhet
+					.antMatchers("/css/**", "/index").permitAll() //utkomenterad vid utveckling
 					.antMatchers("/user/**").hasRole("USER")
 					.and()
 				.formLogin().loginPage("/login").failureUrl("/login-error");
@@ -48,6 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth
 			.inMemoryAuthentication()
 				.withUser("user").password("password").roles("USER");
+		auth
+				.inMemoryAuthentication()
+				.withUser("mohed").password("password").roles("USER");
 	}
 	// @formatter:on
 }
