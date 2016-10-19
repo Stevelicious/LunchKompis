@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/static/css/main.css}" />
+</head>
+<body>
+
+<h1>Sign Up</h1>
+<form th:action="@{/addUser}" th:object="${userDto}" method="post">
+    <label for="firstname">Firstname</label>:
+    <input type="text" id="firstname" th:field="*{firstName}" autofocus="autofocus" />
+    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+    <br />
+    <label for="lastname">Lastname</label>:
+    <input type="text" id="lastname" th:field="*{lastName}" />
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+    <br />
+    <label for="username">Username</label>:
+    <input type="text" id="username" th:field="*{nickname}" />
+    <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></span>
+    <br />
+    <label for="email">Email</label>:
+    <input type="email" id="email" th:field="*{email}" />
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    <br />
+    <label for="password">Password</label>:
+    <input type="password" id="password" th:field="*{password}" />
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    <br />
+    <label for="password2">Repeat Password</label>:
+    <input type="password" id="password2" th:field="*{matchingPassword}" /><br />
+
+    <input type="submit" value="Sign Up" />
+
+</form>
+<p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+</body>
+</html>
