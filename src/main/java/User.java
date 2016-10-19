@@ -1,3 +1,5 @@
+package com.awa;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,16 @@ public class User {
     private String email;
     private String nickname;
     private String password;
+    
+    
+
+    public User(String firstname, String lastname, String email, String nickname, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+    }
 
     public String getFirstname() {
         return firstname;
