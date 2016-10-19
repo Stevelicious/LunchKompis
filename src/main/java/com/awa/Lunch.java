@@ -1,5 +1,7 @@
 package com.awa;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,6 +15,7 @@ import java.util.List;
 //@Entity
 //@Table
 public class Lunch {
+	private static int count = 0;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +26,10 @@ public class Lunch {
 	boolean isPublic;
 	String place;
 	List<User> users = new ArrayList<>();
+	
+	public Lunch() {
+		lunchid = ++count;
+	}
 	
 	public long getLunchid() {
 		return lunchid;
@@ -74,5 +81,10 @@ public class Lunch {
 	
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ID=%d, Title=%s, Users{%s}%n",lunchid,title,users.toString());
 	}
 }

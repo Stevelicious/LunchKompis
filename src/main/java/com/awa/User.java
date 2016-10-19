@@ -2,9 +2,11 @@ package com.awa;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 //@Table
 public class User {
+	
+	private static int count = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,9 +18,11 @@ public class User {
     private String password;
 
     public User() {
+	    userid = ++count;
     }
 
     public User(String firstname, String lastname, String email, String nickname, String password) {
+	    userid = ++count;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -79,6 +83,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", password='" + password + '\'' +
-                '}';
+                "}\n";
     }
 }

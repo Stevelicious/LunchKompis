@@ -12,6 +12,9 @@ import java.util.List;
 //@Entity
 //@Table
 public class UserGroup {
+	private static int count = 0;
+	
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +23,10 @@ public class UserGroup {
 	List<User> users = new ArrayList<>();
 	LocalDateTime creationdate;
 	boolean isPerm;
+	
+	public UserGroup() {
+		usergroupid = ++count;
+	}
 	
 	public long getUsergroupid() {
 		return usergroupid;
@@ -55,5 +62,10 @@ public class UserGroup {
 	
 	public void setPerm(boolean perm) {
 		isPerm = perm;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ID=%d, Title=%s, %nUsers{%s}%n",usergroupid,title,users.toString());
 	}
 }
