@@ -6,7 +6,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Steven Hu on 2016-10-18.
@@ -25,10 +27,12 @@ public class Lunch {
 	LocalTime time;
 	boolean isPublic;
 	String place;
-	List<User> users = new ArrayList<>();
+	Map<User, String> users = new HashMap<>();
+//	List<User> users = new ArrayList<>();
 	
 	public Lunch() {
 		lunchid = ++count;
+		
 	}
 	
 	public long getLunchid() {
@@ -75,16 +79,34 @@ public class Lunch {
 		this.place = place;
 	}
 	
-	public List<User> getUsers() {
+//	public List<User> getUsers() {
+//		return users;
+//	}
+	
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
+	
+	public Map<User, String> getUsers() {
 		return users;
 	}
 	
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUsers(User u, String status) {
+		users.put(u, status);
 	}
+	
+	
 	
 	@Override
 	public String toString() {
-		return String.format("ID=%d, Title=%s, Users{%s}%n",lunchid,title,users.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("ID=%d, Title=%s%n",lunchid,title));
+		for (Map.Entry e :
+				users.entrySet()) {
+			User user = (User) e.getKey();
+			sb.append(String.format("UserID = %d; %s%n",user.getUserid(),e.getValue()));
+		}
+		
+		return sb.toString();
 	}
 }

@@ -34,7 +34,10 @@ public class InMemoryDB {
 			lunch.setTime(LocalTime.now().plusHours(i));
 			lunch.setPlace("Place"+i);
 			lunch.setPublic(true);
-			lunch.setUsers(users.subList(0,i+1));
+			for (int j = 1; j < i + 2; j++) {
+				lunch.setUsers(users.get(j), "Attending");
+			}
+			
 			lunches.add(lunch);
 		}
 		
