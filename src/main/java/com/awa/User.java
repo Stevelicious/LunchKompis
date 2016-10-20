@@ -1,6 +1,7 @@
 package com.awa;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 //@Entity
@@ -17,6 +18,8 @@ public class User {
     private String email;
     private String nickname;
     private String password;
+    private int state;
+    private Date creation_date;
 
     public User() {
 	    userid = ++count;
@@ -73,6 +76,34 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        User.count = count;
+    }
+
+    public void setUserid(long userid) {
+        this.userid = userid;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public Date getCreation_date() {
+        return creation_date;
+    }
+
+    public void setCreation_date(Date creation_date) {
+        this.creation_date = creation_date;
     }
 
     @Override
