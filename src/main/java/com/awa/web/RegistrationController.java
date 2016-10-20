@@ -38,7 +38,7 @@ public class RegistrationController {
         }
         if(!result.hasErrors()){
             repo.createUser(userDto.createUser());
-//            System.out.println(repo.getUsers());
+            System.out.println(repo.getUsers());
         }
 
         return new ModelAndView("index");
