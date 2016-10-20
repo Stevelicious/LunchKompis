@@ -1,8 +1,10 @@
 package com.awa.web;
 
 
+import com.awa.InMemoryRepository;
 import com.awa.validation.UserDto;
 import com.awa.validation.UserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,9 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
+    @Autowired
+    InMemoryRepository repo;
+    
     @RequestMapping("/")
     public ModelAndView signup() {
         return new ModelAndView("index")
@@ -32,9 +37,8 @@ public class RegistrationController {
                     .addObject("userDto", userDto);
         }
         if(!result.hasErrors()){
-//            repo.save(userDto.createUser());
-            System.out.println("Saving to db:");
-            System.out.println(userDto.createUser().toString());
+            repo.createUser(userDto.createUser());
+//            System.out.println(repo.getUsers());
         }
 
         return new ModelAndView("index");

@@ -1,12 +1,15 @@
 package com.awa;
 
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Steven Hu on 2016-10-18.
  */
+@Component
 public class InMemoryRepository implements Repository {
 	
 	InMemoryDB db = new InMemoryDB();
