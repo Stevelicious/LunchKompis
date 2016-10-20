@@ -15,6 +15,7 @@
  */
 package com.awa.web;
 
+import com.awa.validation.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,18 +39,15 @@ public class MainController {
 	@RequestMapping("/user/")
 	public String userIndex() {
 
-		return "user/";
-	}
-
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
+		return "user/index";
 	}
 
 	@RequestMapping("/login-error")
 	public String loginError(Model model) {
+		System.out.println("Login fail");
 		model.addAttribute("loginError", true);
-		return "login";
+		model.addAttribute("userDto", new UserDto());
+		return "index";
 	}
 
 }

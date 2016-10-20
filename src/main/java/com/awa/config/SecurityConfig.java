@@ -33,10 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 					// .antMatchers("/**").permitAll()	// ingen säkerhet
-					.antMatchers("/css/**", "/index").permitAll() //utkomenterad vid utveckling
+					.antMatchers("/css/**", "/").permitAll() //utkomenterad vid utveckling
 					.antMatchers("/user/**").hasRole("USER")
 					.and()
-				.formLogin().loginPage("/login").failureUrl("/login-error");
+				.formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/user/")
+				.failureUrl("/login-error");
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
