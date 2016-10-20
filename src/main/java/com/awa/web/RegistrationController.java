@@ -16,9 +16,9 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    @RequestMapping("/signup")
+    @RequestMapping("/")
     public ModelAndView signup() {
-        return new ModelAndView("signup")
+        return new ModelAndView("index")
                 .addObject("userDto", new UserDto()); }
 
     @RequestMapping("addUser")
@@ -28,7 +28,7 @@ public class RegistrationController {
         userValidator.validate(userDto, result);
 
         if(result.hasErrors()){
-            return new ModelAndView("signup")
+            return new ModelAndView("index")
                     .addObject("userDto", userDto);
         }
         if(!result.hasErrors()){

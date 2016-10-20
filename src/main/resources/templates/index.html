@@ -1,25 +1,351 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-    <head>
-        <title>Hello Spring Security</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
-    </head>
-    <body>
-        <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
-            Logged in user: <span sec:authentication="name"></span> |
-            Roles: <span sec:authentication="principal.authorities"></span>
-            <div>
-                <form action="#" th:action="@{/logout}" method="post">
-                    <input type="submit" value="Logout" />
-                </form>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lunchkompis åt alla</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="SEO" />
+    <meta name="author" content="Dreamteam #Java. C#.net su" />
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
+    <link rel="stylesheet" type="text/css"  href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css" />
+
+    <!-- Slider
+    ================================================== -->
+    <link href="css/owl.carousel.css" rel="stylesheet" media="screen" />
+    <link href="css/owl.theme.css" rel="stylesheet" media="screen" />
+
+    <!-- Stylesheet
+    ================================================== -->
+    <link rel="stylesheet" type="text/css"  href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400' rel='stylesheet' type='text/css' />
+
+    <script type="text/javascript" src="js/modernizr.custom.js"></script>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Navigation
+==========================================-->
+<nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button><img src="img/lunchkompisloggo.png" alt="lunchlogga" />
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#tf-home" class="page-scroll">START</a></li>
+                <li><a href="#tf-about" class="page-scroll">LUNCHKOMPIS?</a></li>
+
+                <li><a href="#tf-register" class="page-scroll">SKAFFA KONTO</a></li>
+                <li><a href="#tf-contact" class="page-scroll">KONTAKT</a></li>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">LOGGA IN <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-lr" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3><b>LOGGA IN</b></h3></div>
+                                <p th:if="${loginError}" class="error">Fel användarnamn eller lösenord</p>
+                                <form id="ajax-login-form" th:action="@{/login}" method="post" role="form" autocomplete="off">
+                                    <div class="form-group">
+                                        <label for="username">Användarnamn</label>
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Användarnamn" value="" autocomplete="off" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password">Lösenord</label>
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Lösenord" autocomplete="off" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <input type="checkbox" tabindex="3" name="remember" id="remember" />
+                                                <label for="remember"> Kom ihåg mig&nbsp;</label>
+                                            </div>
+                                            <div class="col-xs-5 pull-right">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Logga in" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="#" tabindex="5" class="forgot-password">Glömt lösenordet?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </ul></div>
+
+    </div></nav>
+
+<!-- Home Page
+==========================================-->
+<div id="tf-home" class="text-center">
+    <div class="overlay">
+        <div class="content">
+
+            <h1>GLÖMT MATLÅDAN? HITTA EN <strong><span class="color">LUNCHKOMPIS</span></strong></h1>
+            <p class="lead">Använd Lunchkompis för att <strong>någon att </strong>käka med</p>
+
+            <a href="#tf-about" class="fa fa-angle-down page-scroll"></a>
+        </div>
+    </div>
+
+</div>
+
+<!-- About Us Page
+==========================================-->
+<div id="tf-about" class="text-center">
+    <div class="container" id="tf-about">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="img/02.png" alt="hej" class="img-responsive" />
+            </div>
+            <div class="col-md-6">
+                <div class="about-text">
+                    <div class="section-title">
+                        <h4>OM LUNCHKOMPIS</h4>
+                        <h2>Lite mer om <strong>lunchkompis</strong></h2>
+                        <hr />
+                        <div class="clearfix"></div>
+                    </div>
+                    <p class="intro">Vi gör det enklare för dig att hitta någon att luncha med. Skapa en lunchgrupp enkelt och låt dom andra på arbetsplatsen veta att du vill käka ute, eller gå med i en grupp enkelt.</p>
+                    <ul class="about-list">
+                        <li>
+                            <span class="fa fa-dot-circle-o"></span>
+                            <strong>Funktion</strong> - <em>Sök eller hitta en lunchkompis enkelt</em>
+                        </li>
+                        <li>
+                            <span class="fa fa-dot-circle-o"></span>
+                            <strong>Resturanger</strong> - <em>Få tips på resturanger i närheten</em>
+                        </li>
+                        <li>
+                            <span class="fa fa-dot-circle-o"></span>
+                            <strong>Glömsk?</strong> - <em>Du kommer låta lådan vara hemma med flit</em>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <h1>Hello Spring Security</h1>
-        <p>This is an unsecured page, but you can access the secured pages after authenticating.</p>
-        <ul>
-            <li>Go to the <a href="/user/index" th:href="@{/user/index}">secured pages</a></li>
-            <li><a href="/signup">Sign Up</a></li>
-        </ul>
-    </body>
+            <a href="#tf-register" class="fa fa-angle-down"></a>
+    </div>
+
+</div>
+
+
+<!-- Register
+==========================================-->
+<div id="tf-register" class="text-center">
+    <div class="overlay">
+
+        <br />
+
+        <div class="container">
+            <div class="section-title center">
+                <h2>Skaffa ett <strong>Konto</strong> här</h2>
+
+                <div class="line">
+
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+
+                <div class="form group item center">
+                    <form method="post" th:action="@{/addUser}" th:object="${userDto}">
+
+
+
+                        <div class="input-group col-lg-12">
+                            <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+
+                            <input size="60" maxlength="60" class="form-control input-lg" placeholder="Användarnamn" name="username" id="nickname" type="text" th:field="*{nickname}" />
+                        </div>
+                        <br />
+                        <div class="input-group col-lg-12">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                            <input size="60" maxlength="30" class="form-control input-lg" placeholder="Lösenord" name="password" id="password" type="password" th:field="*{password}" />
+                        </div><br />
+                        <div class="input-group col-lg-12">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                            <input size="60" maxlength="30" class="form-control input-lg" placeholder="Bekräfta lösenord" name="password" id="password2" type="password" th:field="*{matchingPassword}" />                                   </div><br />
+                        <div class="input-group col-lg-12">
+
+
+                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+                            <input size="60" maxlength="30" class="form-control input-lg" placeholder="Förnamn" name="firstname" id="firstname" type="text" th:field="*{firstName}" />                                    </div><br />
+                        <div class="input-group col-lg-12">
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+                            <input size="60" maxlength="60" class="form-control input-lg" placeholder="Efternamn" name="lastname" id="lastname" type="text" th:field="*{lastName}" />                                    </div><br />
+
+                        <div class="input-group col-lg-12">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="input-group-addon"><i class="fa fa-envelope mycolor"></i></span>
+                            <input size="60" maxlength="255" class="form-control input-lg" placeholder="Epost" name="email" id="email" type="email" th:field="*{email}" />
+
+
+
+
+<br />
+                        </div><br />
+                        <button class="btn-lg btn-primary" type="submit">Registrera</button>
+                    </form>
+                </div>
+
+                <a href="#tf-contact" class="fa fa-angle-down page-scroll"></a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- <form method="post" th:action="@{/addUser}" th:object="${userDto}">
+
+ <div class="form-group">
+
+    <label for="firstname"  class="control-label">Firstname</label>
+      <input type="text" id="firstname" class="form-control" th:field="*{firstName}" />
+    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+     </div> -->
+
+
+<!-- <div class="form-group">
+   <label for="lastname" >Lastname</label>
+       <input type="text" id="lastname" class="form-control" th:field="*{lastName}" />
+   <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+   </div>-->
+
+<!-- <div class="form-group row">
+
+<label for="username">Username</label>
+<input type="text" id="username" class="form-control" th:field="*{nickname}" />
+<span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></span>
+</div> -->
+<!--   <div class="form-group">
+<label for="email">Email</label>
+<input type="email" id="email" class="form-control" th:field="*{email}" />
+<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+</div>-->
+<!--  <div class="form-group">
+<label for="password">Password</label>
+<input type="password" id="password" class="form-control" th:field="*{password}" />
+<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+</div>-->
+<!-- <div class="form-group">
+<label for="password2">Repeat Password</label>
+<input type="password" id="password2" class="form-control" th:field="*{matchingPassword}" /><br />
+</div>-->
+<!-- <button type="submit" class="btn btn-primary" value="Registrering">SKAPA KONTO!</button>
+
+</div>
+</form>
+ </div>-->
+
+      <!-- Contact Section
+      ==========================================-->
+<div id="tf-contact" class="text-center">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                <div class="section-title center">
+                    <h2>Några funderingar? <strong>kontakta oss</strong></h2>
+                    <div class="line">
+                        <hr />
+                    </div>
+                    <div class="clearfix"></div>
+                    <small><em>Ball tip salami jerky chicken porchetta short ribs leberkas. Ground round shankle beef short ribs. Drumstick shankle bacon strip steak, pastrami pancetta pork belly andouille picanha pork loin ham hock meatball capicola. Ribeye meatloaf chicken burgdoggen.</em></small>
+                </div>
+
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">E-post</label>
+                                <input type="email" class="form-control" id="email" placeholder="Epost" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Namn</label>
+                                <input type="text" class="form-control" id="name" placeholder="För/Efternamn" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="meddelande">Meddelande</label>
+                        <textarea class="form-control" id="meddelande" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn tf-btn btn-default">Skicka</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<nav id="footer">
+    <div class="container">
+        <div class="pull-left fnav">
+            <p>COPYLEFT. ALL MAKT ÅT TENGIL © 1984.<br /><a href="#">Designed by le Dreamteam</a> and coded by <a href="#">Kombaya Sirar</a></p>
+        </div>
+        <div class="pull-right fnav">
+            <ul class="footer-social">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.1.11.1.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/SmoothScroll.js"></script>
+<script type="text/javascript" src="js/jquery.isotope.js"></script>
+
+<script src="js/owl.carousel.js"></script>
+
+<!-- Javascripts
+================================================== -->
+<script type="text/javascript" src="js/main.js"></script>
+
+</body>
 </html>
