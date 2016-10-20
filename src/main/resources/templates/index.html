@@ -191,35 +191,40 @@
 
 
                         <div class="input-group col-lg-12">
-                            <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
 
                             <input size="60" maxlength="60" class="form-control input-lg" placeholder="Användarnamn" name="username" id="nickname" type="text" th:field="*{nickname}" />
+                            <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></span>
+
                         </div>
                         <br />
                         <div class="input-group col-lg-12">
-                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
                             <input size="60" maxlength="30" class="form-control input-lg" placeholder="Lösenord" name="password" id="password" type="password" th:field="*{password}" />
                         </div><br />
+
                         <div class="input-group col-lg-12">
-                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
                             <input size="60" maxlength="30" class="form-control input-lg" placeholder="Bekräfta lösenord" name="password" id="password2" type="password" th:field="*{matchingPassword}" />                                   </div><br />
                         <div class="input-group col-lg-12">
 
 
-                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
                             <input size="60" maxlength="30" class="form-control input-lg" placeholder="Förnamn" name="firstname" id="firstname" type="text" th:field="*{firstName}" />                                    </div><br />
-                        <div class="input-group col-lg-12">
-                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
-                            <input size="60" maxlength="60" class="form-control input-lg" placeholder="Efternamn" name="lastname" id="lastname" type="text" th:field="*{lastName}" />                                    </div><br />
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
 
                         <div class="input-group col-lg-12">
-                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="input-group-addon"><i class="fa fa-envelope mycolor"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+                            <input size="60" maxlength="60" class="form-control input-lg" placeholder="Efternamn" name="lastname" id="lastname" type="text" th:field="*{lastName}" />
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                        </div><br />
+
+                        <div class="input-group col-lg-12">
+                            <span class="input-group-addon"><i class="fa fa-envelope mycolor"></i></span>
                             <input size="60" maxlength="255" class="form-control input-lg" placeholder="Epost" name="email" id="email" type="email" th:field="*{email}" />
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 
-
-
-
-<br />
+                            <br />
                         </div><br />
                         <button class="btn-lg btn-primary" type="submit">Registrera</button>
                     </form>
