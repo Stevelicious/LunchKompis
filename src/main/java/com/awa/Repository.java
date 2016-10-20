@@ -19,6 +19,8 @@ public interface Repository {
 	
 	UserGroup getGroup(long groupID);
 	
+	List<User> getUsersInGroup(long groupID);
+	
 	Lunch getLunch(long lunchID);
 	
 	List<UserGroup> getGroupList(long userID);
@@ -40,4 +42,8 @@ public interface Repository {
 	long addUserToLunch(long lunchID, long userID);
 	
 	long removeUserFromLunch(long lunchID, long userID);
+	
+	long addGroupToLunch(long lunchID, long groupID);
+	
+	
 }

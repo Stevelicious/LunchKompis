@@ -1,9 +1,7 @@
 package com.awa;
 
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -58,6 +56,12 @@ public class InMemoryRepository implements Repository {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<User> getUsersInGroup(long groupID) {
+		return getGroup(groupID).getUsers();
+	}
+	
 	
 	@Override
 	public Lunch getLunch(long lunchID) {
@@ -172,5 +176,17 @@ public class InMemoryRepository implements Repository {
 			return 1;
 		}
 		return 0;
+	}
+	
+	@Override
+	public long addGroupToLunch(long lunchID, long groupID) {
+		Lunch lunch = getLunch(lunchID);
+		List<User> users = getUsersInGroup(groupID);
+		
+		for (User user: users) {
+			if (!lunch.getUsers().keySet().contains(user))
+			lunch.setUsers(user,"Attending");
+		}
+		return 1;
 	}
 }
