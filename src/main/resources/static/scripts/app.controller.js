@@ -1,15 +1,14 @@
-if (!awa)
-    var awa = {};
+if (!lunchApp)
+    var lunchApp = {};
 
-if (!awa.controllers)
-     awa.controllers = {};
+if (!lunchApp.controllers)
+    lunchApp.controllers = {};
 
-awa.controllers.AppController = function() {
-    var self = this;
-
-    this.search = function () {
-    return "Works!"
+lunchApp.controllers.AppController = function ($scope, $http){
+    $http.get('/scripts/groups.json').success(function(data) {
+        $scope.lunchgroups = data.lunches;
+    });
+    $scope.addToGroup = function(group) {
+        $scope.activeGroup = group;
     }
-
-    self.message = "Kalle";
- }
+}

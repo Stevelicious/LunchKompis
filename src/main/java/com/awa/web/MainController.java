@@ -25,20 +25,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-	@RequestMapping("/")
+/*	@RequestMapping("/")
 	public String root() {
-		return "redirect:/index";
-	}
+		return "index";
+	}*/
 
-	@RequestMapping("/index")
+/*	@RequestMapping("/")
 	public String index() {
 		return "index";
-	}
+	}*/
 
-	@RequestMapping("/user/index")
+	@RequestMapping("/user/")
 	public String userIndex() {
 
-		return "user/index";
+		return "user/";
 	}
 
 	@RequestMapping("/login")
