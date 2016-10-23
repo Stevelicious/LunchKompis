@@ -6,6 +6,8 @@
       "time" : "11:30",
       "isPublic" : false,
       "place" : "dovas",
+      "lat" : "59.33552",
+      "lon" : "18.03314",
       "users" : [
         "user1", "user2"
       ]
@@ -16,6 +18,8 @@
       "time" : "12:00",
       "isPublic" : true,
       "place" : "pong",
+      "lat" : "59.33214",
+      "lon" : "18.06340",
       "users" : [
         "user9", "user2"
       ]
@@ -26,6 +30,8 @@
       "time" : "11:00",
       "isPublic" : true,
       "place" : "mcdonalds",
+      "lat" : "59.33214",
+      "lon" : "18.06340",
       "users" : [
         "user1", "user6"
       ]
