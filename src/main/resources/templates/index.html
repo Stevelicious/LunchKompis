@@ -221,7 +221,7 @@
 
                         <div class="input-group col-lg-12">
                             <span class="input-group-addon"><i class="fa fa-envelope mycolor"></i></span>
-                            <input size="60" maxlength="255" class="form-control input-lg" placeholder="Epost" name="email" id="email" type="email" th:field="*{email}" />
+                            <input size="60" maxlength="255" class="form-control input-lg" placeholder="E-post" name="email" id="email" type="email" th:field="*{email}" />
                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 
                             <br />
@@ -238,48 +238,6 @@
     </div>
 </div>
 
-
-<!-- <form method="post" th:action="@{/addUser}" th:object="${userDto}">
-
- <div class="form-group">
-
-    <label for="firstname"  class="control-label">Firstname</label>
-      <input type="text" id="firstname" class="form-control" th:field="*{firstName}" />
-    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-     </div> -->
-
-
-<!-- <div class="form-group">
-   <label for="lastname" >Lastname</label>
-       <input type="text" id="lastname" class="form-control" th:field="*{lastName}" />
-   <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-   </div>-->
-
-<!-- <div class="form-group row">
-
-<label for="username">Username</label>
-<input type="text" id="username" class="form-control" th:field="*{nickname}" />
-<span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></span>
-</div> -->
-<!--   <div class="form-group">
-<label for="email">Email</label>
-<input type="email" id="email" class="form-control" th:field="*{email}" />
-<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-</div>-->
-<!--  <div class="form-group">
-<label for="password">Password</label>
-<input type="password" id="password" class="form-control" th:field="*{password}" />
-<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-</div>-->
-<!-- <div class="form-group">
-<label for="password2">Repeat Password</label>
-<input type="password" id="password2" class="form-control" th:field="*{matchingPassword}" /><br />
-</div>-->
-<!-- <button type="submit" class="btn btn-primary" value="Registrering">SKAPA KONTO!</button>
-
-</div>
-</form>
- </div>-->
 
       <!-- Contact Section
       ==========================================-->
@@ -302,8 +260,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">E-post</label>
-                                <input type="email" class="form-control" id="email" placeholder="Epost" />
+                                <label for="contactEmail">E-post</label>
+                                <input type="email" class="form-control" id="contactEmail" placeholder="E-post" />
                             </div>
                         </div>
                         <div class="col-md-6">
