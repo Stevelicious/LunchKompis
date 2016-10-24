@@ -29,9 +29,7 @@ lunchApp.controllers.MapController = function ($scope, $http) {
     }
 
     var zoom = 18;
-    var map; //complex object of type OpenLayers.Map
-
-    //Initialise the 'map' object
+    var map;
 
     function init(lat, lon, title) {
         map = new OpenLayers.Map(title, {
@@ -53,6 +51,12 @@ lunchApp.controllers.MapController = function ($scope, $http) {
         if (!map.getCenter()) {
             var lonLat = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
             map.setCenter(lonLat, zoom);
+            var marker = new OpenLayers.Layer.Markers("Markers");
+            var size = new OpenLayers.Size(20, 20);
+            var offset = new OpenLayers.Pixel(-(size.w / 2), -(size.h / 2));
+            var icon = new OpenLayers.Icon('/scripts/marker.png', size, offset);
+            map.addLayer(marker);
+            marker.addMarker(new OpenLayers.Marker(lonLat, icon));
         }
     }
 
