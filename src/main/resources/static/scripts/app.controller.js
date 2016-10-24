@@ -5,8 +5,8 @@ if (!lunchApp.controllers)
     lunchApp.controllers = {};
 
 lunchApp.controllers.AppController = function ($scope, $http){
-    $http.get('/scripts/groups.json').success(function(data) {
-        $scope.lunchgroups = data.lunches;
+    $http.get('/api/groups').success(function(data) {
+        $scope.lunchgroups = data;
     });
     $scope.addToGroup = function(group) {
         $scope.activeGroup = group;

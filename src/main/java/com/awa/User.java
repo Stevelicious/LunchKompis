@@ -1,7 +1,13 @@
 package com.awa;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 //@Entity
@@ -105,16 +111,40 @@ public class User {
     public void setCreation_date(Date creation_date) {
         this.creation_date = creation_date;
     }
+//
+//    @Override
+//    public String toString() {
+////
+////        ObjectMapper mapper = new ObjectMapper();
+////        Map<String, Object> map = new HashMap<>();
+////        map.put("userid", userid);
+////        map.put("firstname", firstname);
+////        map.put("lastname", lastname);
+////        map.put("email", email);
+////        map.put("nickname", nickname);
+////        map.put("password", password);
+////        String json = null;
+////        try {
+////            json = mapper.writeValueAsString(map);
+////        } catch (JsonProcessingException e) {
+////            e.printStackTrace();
+////        }
+////        System.out.println(json);
+////        return json;
+//
+//    }
 
     @Override
     public String toString() {
         return "User{" +
-                "userid = " + userid +
-                ", firstname = '" + firstname +
-                "', lastname = '" + lastname +
-                "', email = '" + email +
-                "', nickname = '" + nickname +
-                "', password = '" + password +
-                "'}\n";
+                "userid " + userid +
+                "firstname" + firstname +
+                "lastname" + lastname+
+                "email" + email+
+                "nickname" + nickname+
+                "password" + password+
+                "state" + state +
+                "creation_date" + creation_date +
+                '}';
     }
 }

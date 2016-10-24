@@ -13,11 +13,13 @@
 <h1>This is a secured page!</h1>
 
 <div ng-controller="groupCtrl">
-    <div ng-controller="mapCtrl" >
-        <div ng-repeat="lunch in lunchgroups" ng-click="showme=!showme; setLoc(lunch)">
-            {{lunch.title}}
-            <div ng-show="showme">
-                {{lunch.date}} {{lunch.time}} {{lunch.isPublic}} {{lunch.place}} {{lunch.users}}
+    <div ng-controller="mapCtrl">
+        <div ng-repeat="lunch in lunchgroups" ng-click="showme=!showme; setLoc(lunch)">{{lunch.title}}
+            <div ng-show="showme">{{lunch.place}} at {{lunch.time.hour}}:{{lunch.time.minute}} {{lunch.date.dayOfMonth}} {{lunch.date.month}},
+                <div ng-repeat='(key, value) in lunch.users'>
+                    <span>{{key}} :</span>
+                    <div ng-repeat="user in value">{{user.nickname}}</div>
+                </div>
                 <button ng-click="addToGroup(lunch)">Add me</button>
                 <div style="width:500px; height:300px" id="{{lunch.title}}"></div>
             </div>
