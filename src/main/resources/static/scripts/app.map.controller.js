@@ -6,12 +6,26 @@ if (!lunchApp.controllers)
 
 
 lunchApp.controllers.MapController = function ($scope, $http) {
+    var usedTitles = [];
+    Array.prototype.contains = function(obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i] == obj) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     $http.get('/scripts/groups.json').success(function (data) {
         $scope.locations = data.lunches;
     });
-    $scope.setLoc = function (location) {
-        init(location.lat, location.lon);
+    $scope.setLoc = function (lunch) {
+        if(!(usedTitles.contains(lunch.title))){
+            console.log(usedTitles);
+            init(lunch.lat, lunch.lon, lunch.title);
+            usedTitles.push(lunch.title);
+        }
     }
 
     var zoom = 18;
@@ -19,8 +33,8 @@ lunchApp.controllers.MapController = function ($scope, $http) {
 
     //Initialise the 'map' object
 
-    function init(lat, lon) {
-        map = new OpenLayers.Map("map", {
+    function init(lat, lon, title) {
+        map = new OpenLayers.Map(title, {
             controls: [
                 new OpenLayers.Control.Navigation(),
                 new OpenLayers.Control.MousePosition(),
