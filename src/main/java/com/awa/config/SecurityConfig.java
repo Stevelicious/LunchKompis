@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/css/**", "/").permitAll() //utkomenterad vid utveckling
 				.antMatchers("/user/**").hasAuthority("USER")
 				.and()
+
 				.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/user/")
