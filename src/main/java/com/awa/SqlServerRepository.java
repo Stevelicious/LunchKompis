@@ -388,26 +388,123 @@ public class SqlServerRepository implements Repository {
 
     @Override
     public long removeUserFromGroup(long groupID, long userID) {
-        return 0;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM [dbo].[UserConnector] WHERE usergroup_id = ? AND User_id = ?")) {
+
+            ps.setLong(1, groupID);
+            ps.setLong(2, userID);
+
+
+            int rs = ps.executeUpdate();
+            if (rs == 0) {
+
+                System.out.println("error is 0");
+            }
+
+            return rs;
+
+
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e);
+        }
+
+
+
+
+
+
     }
 
     @Override
     public long updateLunch(long lunchID, Lunch lunch) {
-        return 0;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[lunchusers] SET title=?, date=?, time=?, isPublic = ?, place = ?  WHERE ID=? ")) {
+
+            ps.setString(1, lunch.getTitle());
+
+            ps.setDate(2, Date.valueOf(lunch.getDate()));
+            ps.setTime(3, Time.valueOf(lunch.getTime()));
+            ps.setBoolean(4, lunch.isPublic());
+            ps.setString(5, lunch.getPlace());
+            ps.setLong(6, lunchID);
+
+            ps.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e + "Trouble in depositToProject() in SQLServerProjectRepository. Could probably not execute query");
+        }
+
+
+
     }
 
     @Override
     public long addUserToLunch(long lunchID, long userID) {
-        return 0;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[Connector] (Lunch_id, User_id, )  VALUES (?,? )")) {
+
+            ps.setLong(1, lunchID);
+            ps.setLong(2, userID);
+
+
+            int rs = ps.executeUpdate();
+            if (rs == 0) {
+
+                System.out.println("error is 0");
+            }
+
+            return rs;
+
+
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e);
+        }
+
+
+
+
     }
 
     @Override
     public long removeUserFromLunch(long lunchID, long userID) {
-        return 0;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM [dbo].[Connector] WHERE lunch_id = ? AND User_id = ?")) {
+
+            ps.setLong(1, lunchID);
+            ps.setLong(2, userID);
+
+
+            int rs = ps.executeUpdate();
+            if (rs == 0) {
+
+                System.out.println("error is 0");
+            }
+
+            return rs;
+
+
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e);
+        }
+
+
+
+
     }
 
     @Override
     public long addGroupToLunch(long lunchID, long groupID) {
-        return 0;
+
+        List<User> UserList =  getUsersInGroup(groupID);
+        for(User user:UserList){
+            addUserToLunch(lunchID, user.getUserid());
+
+
+        }
+        return 1;
+
+
+
     }
 }
