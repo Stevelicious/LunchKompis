@@ -262,27 +262,128 @@ public class SqlServerRepository implements Repository {
 
     @Override
     public List<Lunch> getLunchList(long userID) {
-        return null;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.lunch WHERE Lunchid IN(SELECT Lunch_id FROM dbo.Connector WHERE User_id = ?); ")) {
+            ps.setLong(1, userID);
+            ResultSet rs = ps.executeQuery();
+            List<Lunch> lunchList = new ArrayList<Lunch>();
+            while (rs.next()) {
+                Lunch lunch = new Lunch();
+                lunch.setTitle(rs.getString("title"));
+                lunch.setDate(rs.getDate("date").toLocalDate());
+                lunch.setTime(rs.getTime("time").toLocalTime());
+                lunch.setPublic(rs.getBoolean("isPublic"));
+                lunch.setPlace(rs.getString("place"));
+                lunchList.add(lunch);
+
+
+
+            }
+            return lunchList;
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e + "Trouble in getUserID() in SQLServerProjectRepository. Could probably not execute query");
+        }
+
+
+
+
     }
 
     @Override
     public List<Lunch> getPublicLunchList() {
-        return null;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.lunch WHERE Lunchid IN(SELECT Lunch_id FROM dbo.Connector) AND isPublic = 1; ")) {
+
+            ResultSet rs = ps.executeQuery();
+            List<Lunch> lunchList = new ArrayList<Lunch>();
+            while (rs.next()) {
+                Lunch lunch = new Lunch();
+                lunch.setTitle(rs.getString("title"));
+                lunch.setDate(rs.getDate("date").toLocalDate());
+                lunch.setTime(rs.getTime("time").toLocalTime());
+                lunch.setPublic(rs.getBoolean("isPublic"));
+                lunch.setPlace(rs.getString("place"));
+                lunchList.add(lunch);
+
+
+
+            }
+            return lunchList;
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e + "Trouble in getUserID() in SQLServerProjectRepository. Could probably not execute query");
+        }
+
+
+
     }
 
     @Override
     public long updateUser(long userID, User user) {
-        return 0;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[lunchusers] SET firstname=?, lastname=?, email=?, nickname = ?, state = ?, pass=?  WHERE ID=? ")) {
+
+            ps.setString(1, user.getFirstname());
+            ps.setString(2, user.getLastname());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getNickname());
+            ps.setInt(5, user.getState());
+            ps.setString(6, user.getPassword());
+            ps.setLong(7, userID);
+
+            ps.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e + "Trouble in depositToProject() in SQLServerProjectRepository. Could probably not execute query");
+        }
     }
 
     @Override
     public long updateGroup(long groupID, UserGroup group) {
-        return 0;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Usergroup] SET title=?, is_perm=? WHERE ID=? ")) {
+
+            ps.setString(1, group.getTitle());
+            ps.setBoolean(2, group.isPerm());
+            ps.setLong(3, groupID);
+
+
+
+            ps.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e + "Trouble in depositToProject() in SQLServerProjectRepository. Could probably not execute query");
+        }
+
+
     }
 
     @Override
     public long addUserToGroup(long groupID, long userID) {
-        return 0;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[UserConnector] (usergroup_id, User_id)  VALUES (?,? )")) {
+
+            ps.setLong(1, groupID);
+            ps.setLong(2, userID);
+
+
+            int rs = ps.executeUpdate();
+            if (rs == 0) {
+
+                System.out.println("error is 0");
+            }
+
+            return rs;
+
+
+        } catch (SQLException e) {
+            throw new LunchRepositoryException(e);
+        }
+
+
+
     }
 
     @Override
