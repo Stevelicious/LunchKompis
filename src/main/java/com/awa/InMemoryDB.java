@@ -36,8 +36,8 @@ public class InMemoryDB {
 			lunch.setPublic(true);
 			for (int j = 1; j < i + 2; j++) {
 				lunch.setUsers(users.get(j), "Attending");
+				lunch.setUsers(users.get(j), "Invited");
 			}
-			
 			lunches.add(lunch);
 		}
 		

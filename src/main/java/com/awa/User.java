@@ -4,9 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 
+
 //@Entity
 //@Table
-public class User {
+public class User{
 	
 	private static int count = 0;
 
@@ -106,15 +107,18 @@ public class User {
         this.creation_date = creation_date;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
-                "userid = " + userid +
-                ", firstname = '" + firstname +
-                "', lastname = '" + lastname +
-                "', email = '" + email +
-                "', nickname = '" + nickname +
-                "', password = '" + password +
-                "'}\n";
+                "userid " + userid +
+                "firstname" + firstname +
+                "lastname" + lastname+
+                "email" + email+
+                "nickname" + nickname+
+                "password" + password+
+                "state" + state +
+                "creation_date" + creation_date +
+                '}';
     }
 }

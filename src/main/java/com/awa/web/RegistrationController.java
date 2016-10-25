@@ -2,6 +2,7 @@ package com.awa.web;
 
 
 import com.awa.InMemoryRepository;
+import com.awa.SqlServerRepository;
 import com.awa.validation.UserDto;
 import com.awa.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 public class RegistrationController {
 	
 	@Autowired
-	InMemoryRepository repo;
+	SqlServerRepository repo;
 	
 	@RequestMapping("/")
 	public ModelAndView start(@ModelAttribute("userDto") UserDto userDto) {

@@ -4,7 +4,9 @@ package com.awa;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,8 +26,11 @@ public class Lunch {
 	LocalTime time;
 	boolean isPublic;
 	String place;
-	Map<User, String> users = new HashMap<>();
+
+//	Map<User, String> users = new HashMap<>();
 //	List<User> users = new ArrayList<>();
+	Map<String, ArrayList<User>> users = new HashMap<>();
+
 	
 	public Lunch() {
 		lunchid = ++count;
@@ -76,12 +81,28 @@ public class Lunch {
 		this.place = place;
 	}
 	
-	public Map<User, String> getUsers() {
+	public Map<String, ArrayList<User>> getUsers() {
 		return users;
 	}
 	
-	public void setUsers(User u, String status) {
-		users.put(u, status);
+	public void setUsers(User user, String status) {
+		ArrayList<User> userArrayList = new ArrayList<>();
+
+		if(users.containsKey(status)){
+			userArrayList = users.get(status);
+		}
+		if(userArrayList.isEmpty()){
+			userArrayList.add(0, user);
+		}else{
+			userArrayList.add(userArrayList.size(), user);
+		}
+		users.put(status, userArrayList);
+		for (String list: users.keySet()) {
+			System.out.println(list + " contains:");
+			for (User user1: users.get(list)) {
+				System.out.println(user1);
+			}
+		}
 	}
 	
 	@Override

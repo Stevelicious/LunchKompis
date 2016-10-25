@@ -20,25 +20,24 @@ public class SqlServerRepository implements Repository {
     @Override
     public long createUser(User user) {
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[lunchusers] (firstname, lastname, email, nickname, state, creation_date, pass)  VALUES (?,?,?,?,?,GETDATE(),?)")) {
+             PreparedStatement ps = conn.prepareStatement(
+             		"INSERT INTO [dbo].[users] (firstname, lastname, email, username, password)  VALUES (?,?,?,?,?); " +
+			                "INSERT INTO [dbo].[userRoles] (user_id, role) VALUES ((SELECT userid FROM [users] where username =?),?);")) {
 
             ps.setString(1, user.getFirstname());
-
             ps.setString(2, user.getLastname());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getNickname());
-            ps.setLong(5, user.getState());
-
-
-            ps.setString(6, user.getPassword());
-
+            ps.setString(5, user.getPassword());
+	        ps.setString(6,user.getNickname() );
+	        ps.setString(7, "USER");
 
             int rs = ps.executeUpdate();
             if (rs == 0) {
 
                 System.out.println("error is 0");
             }
-
+	        
             return 1;
 
 
