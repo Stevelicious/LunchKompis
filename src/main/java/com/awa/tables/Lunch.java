@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * Created by Steven Hu on 2016-10-18.
  */
@@ -109,11 +110,10 @@ public class Lunch {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("ID = %d, Title = %s%n", lunchid, title));
 		for (Map.Entry e : users.entrySet()) {
-			User user = (User) e.getKey();
-			sb.append(String.format("\tUserID = %d; %s%n", user.getUserid(), e.getValue()));
+			sb.append(String.format("%n%s :",  e.getKey()));
+			ArrayList<User> list = (ArrayList<User>) e.getValue();
+			sb.append(list.toString());
 		}
-		
-		
 		return sb.toString();
 	}
 }

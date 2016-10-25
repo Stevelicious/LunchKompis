@@ -15,14 +15,25 @@
  */
 package com.awa.web;
 
+import com.awa.InMemoryDB;
+import com.awa.InMemoryRepository;
+import com.awa.SqlServerRepository;
+import com.awa.tables.User;
 import com.awa.validation.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class MainController {
+	@Autowired
+	SqlServerRepository repo;
 
 /*	@RequestMapping("/")
 	public String root() {
@@ -35,8 +46,16 @@ public class MainController {
 	}*/
 
 	@RequestMapping("/user/")
-	public String userIndex() {
+	public String userIndex(HttpSession session) {
 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName();
+		for (User user : repo.getUsers()) {
+			if(user.getNickname() == name){
+				session.setAttribute("userid", user.getUserid());
+			}
+		}
+//		session.setAttribute("userid", 12);
 		return "user/index";
 	}
 

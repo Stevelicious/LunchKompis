@@ -16,23 +16,42 @@ lunchApp.controllers.MapController = function ($scope, $http) {
         }
         return false;
     }
+    //
+    // $http.get('/scripts/groups.json').success(function (data) {
+    //     $scope.locations = data.lunches;
+    // });
 
-    $http.get('/scripts/groups.json').success(function (data) {
-        $scope.locations = data.lunches;
+    var query = "vegabaren";
+    var osmid;
+    $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q='+encodeURI(query)).success(function (data) {
+        osmid = data[0].osm_id;
+        console.log(osmid);
     });
+
     $scope.setLoc = function (lunch) {
-        if(!(usedTitles.contains(lunch.title))){
-            console.log(usedTitles);
-            init(lunch.lat, lunch.lon, lunch.title);
-            usedTitles.push(lunch.title);
+        if(!(usedTitles.contains(lunch.lunchid))){
+            $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=N&osm_id=' + encodeURI(osmid)).success(function (data) {
+                console.log(lunch.lunchid);
+                console.log(data);
+                init(data.lat, data.lon, lunch.lunchid);
+                usedTitles.push(lunch.lunchid);
+            })
         }
     }
+
+    // $scope.setLoc = function (lunch) {
+    //     if(!(usedTitles.contains(lunch.title))){
+    //         console.log(usedTitles);
+    //         init(lunch.lat, lunch.lon, lunch.title);
+    //         usedTitles.push(lunch.title);
+    //     }
+    // }
 
     var zoom = 18;
     var map;
 
-    function init(lat, lon, title) {
-        map = new OpenLayers.Map(title, {
+    function init(lat, lon, lunchid) {
+        map = new OpenLayers.Map(lunchid.toString(), {
             controls: [
                 new OpenLayers.Control.Navigation(),
                 new OpenLayers.Control.MousePosition(),

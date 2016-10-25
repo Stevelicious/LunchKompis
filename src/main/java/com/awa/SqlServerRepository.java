@@ -109,9 +109,9 @@ public class SqlServerRepository implements Repository {
 			while (rs.next()) {
 				user.setFirstname(rs.getString("firstname"));
 				user.setLastname(rs.getString("lastname"));
-				user.setNickname(rs.getString("nickname"));
-				user.setPassword(rs.getString("pass"));
-				user.setCreation_date(rs.getDate("creation_date"));
+				user.setNickname(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setCreation_date(rs.getDate("creationdate"));
 				user.setEmail(rs.getString("email"));
 				user.setState(rs.getInt("state"));
 				
@@ -136,11 +136,11 @@ public class SqlServerRepository implements Repository {
 				User user = new User();
 				user.setFirstname(rs.getString("firstname"));
 				user.setLastname(rs.getString("lastname"));
-				user.setNickname(rs.getString("nickname"));
-				user.setPassword(rs.getString("pass"));
-				user.setCreation_date(rs.getDate("creation_date"));
+				user.setNickname(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setCreation_date(rs.getDate("creationdate"));
 				user.setEmail(rs.getString("email"));
-				user.setState(rs.getInt("state"));
+				user.setState(rs.getInt("status"));
 				userList.add(user);
 				
 				
@@ -184,11 +184,11 @@ public class SqlServerRepository implements Repository {
 				User user = new User();
 				user.setFirstname(rs.getString("firstname"));
 				user.setLastname(rs.getString("lastname"));
-				user.setNickname(rs.getString("nickname"));
-				user.setPassword(rs.getString("pass"));
-				user.setCreation_date(rs.getDate("creation_date"));
+				user.setNickname(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setCreation_date(rs.getDate("creationdate"));
 				user.setEmail(rs.getString("email"));
-				user.setState(rs.getInt("state"));
+				user.setState(rs.getInt("status"));
 				userList.add(user);
 				
 				
@@ -306,7 +306,7 @@ public class SqlServerRepository implements Repository {
 	public long updateUser(long userID, User user) {
 		
 		try (Connection conn = dataSource.getConnection();
-		     PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[users] SET firstname=?, lastname=?, email=?, nickname = ?, state = ?, pass=?  WHERE userid=? ")) {
+		     PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[users] SET firstname=?, lastname=?, email=?, username = ?, state = ?, password=?  WHERE userid=? ")) {
 			
 			ps.setString(1, user.getFirstname());
 			ps.setString(2, user.getLastname());
