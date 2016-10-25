@@ -1,5 +1,9 @@
 package com.awa;
 
+import com.awa.tables.Lunch;
+import com.awa.tables.User;
+import com.awa.tables.UserGroup;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

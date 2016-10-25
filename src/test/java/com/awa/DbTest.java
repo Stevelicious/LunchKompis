@@ -1,5 +1,8 @@
 package com.awa;
 
+import com.awa.tables.Lunch;
+import com.awa.tables.User;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -8,6 +11,7 @@ import java.time.LocalTime;
  */
 public class DbTest {
 	public static void main(String[] args) {
+		
 		Repository repo = new InMemoryRepository();
 		System.out.println(repo.getLunch(3));
 		

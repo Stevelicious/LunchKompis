@@ -1,6 +1,9 @@
 package com.awa;
 
 
+import com.awa.tables.Lunch;
+import com.awa.tables.User;
+import com.awa.tables.UserGroup;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -85,7 +88,7 @@ public class InMemoryRepository implements Repository {
 		
 		for (UserGroup group :
 				db.groupes) {
-			if (group.users.contains(user)) {
+			if (group.getUsers().contains(user)) {
 				groups.add(group);
 			}
 		}
@@ -99,7 +102,7 @@ public class InMemoryRepository implements Repository {
 		
 		for (Lunch lunch:
 				db.lunches) {
-			if (lunch.users.containsKey(user)) {
+			if (lunch.getUsers().containsKey(user)) {
 				lunches.add(lunch);
 			}
 		}
@@ -112,7 +115,7 @@ public class InMemoryRepository implements Repository {
 		
 		for (Lunch lunch:
 				db.lunches) {
-			if (lunch.isPublic) {
+			if (lunch.isPublic()) {
 				lunches.add(lunch);
 			}
 		}
@@ -163,7 +166,7 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		User user = getUser(userID);
 		
-		if(!lunch.users.containsKey(user)){
+		if(!lunch.getUsers().containsKey(user)){
 			lunch.setUsers(user,"Attending");
 			return 1;
 		}
@@ -175,8 +178,8 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		User user = getUser(userID);
 		
-		if(lunch.users.containsKey(user)){
-			lunch.users.remove(user);
+		if(lunch.getUsers().containsKey(user)){
+			lunch.getUsers().remove(user);
 			return 1;
 		}
 		return 0;

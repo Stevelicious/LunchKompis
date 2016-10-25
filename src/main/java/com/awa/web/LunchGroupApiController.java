@@ -1,19 +1,13 @@
 package com.awa.web;
 
 import com.awa.InMemoryRepository;
-import com.awa.Lunch;
-import com.awa.User;
+import com.awa.tables.Lunch;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
-import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
 
 /**
  * Created by Administrator on 2016-10-18.

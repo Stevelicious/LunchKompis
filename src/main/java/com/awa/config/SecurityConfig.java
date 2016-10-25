@@ -15,9 +15,7 @@
  */
 package com.awa.config;
 
-import com.awa.InMemoryDB;
 import com.awa.InMemoryRepository;
-import com.awa.User;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -46,7 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/css/**", "/").permitAll() //utkomenterad vid utveckling
 				.antMatchers("/user/**").hasAuthority("USER")
 				.and()
-
 				.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/user/")
@@ -64,7 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.inMemoryAuthentication()
 				.withUser("user").password("password").authorities("USER");
 		
-		auth.jdbcAuthentication().dataSource(dataSource)
+		auth.
+				jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery(
 						"select username,password, status from users where username=?")
 				.authoritiesByUsernameQuery(

@@ -1,6 +1,6 @@
 package com.awa.validation;
 
-import com.awa.User;
+import com.awa.tables.User;
 
 public class UserDto {
 

@@ -1,4 +1,4 @@
-package com.awa;
+package com.awa.tables;
 
 import javax.persistence.*;
 import java.util.Date;
