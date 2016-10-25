@@ -1,12 +1,14 @@
 package com.awa;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.Date;
 
 
 //@Entity
 //@Table
-public class User {
+public class User{
 	
 	private static int count = 0;
 

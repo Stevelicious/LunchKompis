@@ -25,7 +25,6 @@ public class Lunch {
 	boolean isPublic;
 	String place;
 	Map<User, String> users = new HashMap<>();
-//	List<User> users = new ArrayList<>();
 	
 	public Lunch() {
 		lunchid = ++count;
