@@ -140,7 +140,7 @@ public class SqlServerRepository implements Repository {
 				user.setPassword(rs.getString("password"));
 				user.setCreation_date(rs.getDate("creationdate"));
 				user.setEmail(rs.getString("email"));
-				user.setState(rs.getInt("state"));
+				user.setState(rs.getInt("status"));
 				userList.add(user);
 				
 				
@@ -188,7 +188,7 @@ public class SqlServerRepository implements Repository {
 				user.setPassword(rs.getString("password"));
 				user.setCreation_date(rs.getDate("creationdate"));
 				user.setEmail(rs.getString("email"));
-				user.setState(rs.getInt("state"));
+				user.setState(rs.getInt("status"));
 				userList.add(user);
 				
 				
