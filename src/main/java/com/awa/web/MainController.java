@@ -18,7 +18,7 @@ package com.awa.web;
 import com.awa.InMemoryDB;
 import com.awa.InMemoryRepository;
 import com.awa.SqlServerRepository;
-import com.awa.User;
+import com.awa.tables.User;
 import com.awa.validation.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
