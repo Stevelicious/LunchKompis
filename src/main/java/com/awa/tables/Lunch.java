@@ -26,6 +26,7 @@ public class Lunch {
 	LocalTime time;
 	boolean isPublic;
 	String place;
+	int host;
 
 //	Map<User, String> users = new HashMap<>();
 //	List<User> users = new ArrayList<>();

@@ -16,10 +16,7 @@ lunchApp.controllers.MapController = function ($scope, $http) {
         }
         return false;
     }
-    //
-    // $http.get('/scripts/groups.json').success(function (data) {
-    //     $scope.locations = data.lunches;
-    // });
+
 
     var query = "vegabaren";
     var osmid;
@@ -38,14 +35,6 @@ lunchApp.controllers.MapController = function ($scope, $http) {
             })
         }
     }
-
-    // $scope.setLoc = function (lunch) {
-    //     if(!(usedTitles.contains(lunch.title))){
-    //         console.log(usedTitles);
-    //         init(lunch.lat, lunch.lon, lunch.title);
-    //         usedTitles.push(lunch.title);
-    //     }
-    // }
 
     var zoom = 18;
     var map;
