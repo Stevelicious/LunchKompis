@@ -36,10 +36,10 @@ body {
 /* NAVBAR END*/
 
 .plusmenu {
-    position:absolute;
+    position:relative;
     top: 80%;
     left: 90%;
-
+    z-index: 1000;
 }
 
 
