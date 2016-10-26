@@ -7,7 +7,7 @@ if (!lunchApp.controllers)
 
 lunchApp.controllers.MapController = function ($scope, $http) {
     var usedTitles = [];
-    Array.prototype.contains = function(obj) {
+    Array.prototype.contains = function (obj) {
         var i = this.length;
         while (i--) {
             if (this[i] == obj) {
@@ -17,19 +17,17 @@ lunchApp.controllers.MapController = function ($scope, $http) {
         return false;
     }
 
-
-    var query = "vegabaren";
-    var osmid;
-    $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q='+encodeURI(query)).success(function (data) {
-        osmid = data[0].osm_id;
-        console.log(osmid);
-    });
+    $scope.doQuery = function (searchPlace, lunch) {
+        var query = searchPlace;
+        $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q=' + encodeURI(query)).success(function (data) {
+            lunch.osmid = data[0].osm_id;
+            lunch.osmtype = data[0].osm_type;
+        });
+    }
 
     $scope.setLoc = function (lunch) {
-        if(!(usedTitles.contains(lunch.lunchid))){
-            $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=N&osm_id=' + encodeURI(osmid)).success(function (data) {
-                console.log(lunch.lunchid);
-                console.log(data);
+        if (!(usedTitles.contains(lunch.lunchid))) {
+            $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osmtype).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osmid)).success(function (data) {
                 init(data.lat, data.lon, lunch.lunchid);
                 usedTitles.push(lunch.lunchid);
             })
