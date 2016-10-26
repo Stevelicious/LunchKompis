@@ -1,0 +1,48 @@
+<div class="lunch-ui-wrap">
+    <div class="lunch-ui">
+        <div class="header">
+            <div class="photo">
+                <img src="http://s7.favim.com/610/151230/food-tumblr-Favim.com-3825107.jpg"/>
+            </div>
+
+        </div>
+        <div class="content">
+            <div class="name">{{lunch.title}}</div>
+
+            <input type="text" ng-model = "searchPlace"/>
+            <button type="button" ng-click="doQuery(searchPlace, lunch)">Submit</button>
+
+            <p class="text">{{lunch.place}} klockan {{lunch.time.hour}}:{{lunch.time.minute}}
+                den {{lunch.date.dayOfMonth}}
+                {{lunch.date.month}}</p></div>
+        <div class="bottom">
+            <div class="left">
+                <button type="button" class="btn btn-primary btn-md"
+                        ng-click="showme=!showme; setLoc(lunch)">ÖPPNA!
+                </button>
+            </div>
+            <div class="right ">
+
+<span class="fa-stack text-primary">
+<i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
+</span>5
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--end-->
+
+<!--  hidden element-->
+<div ng-show="showme">
+    <div ng-repeat='(key, value) in lunch.users'>
+        <span>{{key}} :</span>
+        <div ng-repeat="user in value">{{user.nickname}}</div>
+    </div>
+    <button ng-click="addToGroup(lunch)">Add me</button>
+    <div style="width:500px; height:300px" id="{{lunch.lunchid}}"></div>
+</div>
+<!--hidden element-->
+</div>
+</div>

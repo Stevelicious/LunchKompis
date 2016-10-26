@@ -1,10 +1,13 @@
-if (!lunchApp)
-    var lunchApp = {};
+if (!lunchKompis)
+    var lunchKompis = {};
 
-if (!lunchApp.controllers)
-    lunchApp.controllers = {};
+if (!lunchKompis.lunchlist)
+    lunchKompis.lunchlist = {};
 
-lunchApp.controllers.AppController = function ($scope, $http, $window){
+lunchKompis.lunchlist.AppController = function ($scope, $http, $window){
+
+    var self = this;
+
     $http.get('/api/groups').success(function(data) {
         $scope.lunchgroups = data;
     });
