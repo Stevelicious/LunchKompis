@@ -7,7 +7,8 @@
     <!--    /*Mathias*/-->
     <link rel="stylesheet" href="/css/normalize.css"/>
 
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'/>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'/>
     <!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css'/>-->
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'/>
 
@@ -34,7 +35,8 @@
                         <div class="name">{{lunch.title}}</div>
                         <p class="text">{{lunch.place}} klockan {{lunch.time.hour}}:{{lunch.time.minute}}
                             den {{lunch.date.dayOfMonth}}
-                            {{lunch.date.month}}</p></div>
+                            {{lunch.date.month}}</p>
+                    </div>
                     <div class="bottom">
                         <div class="left">
                             <button type="button" class="btn btn-primary btn-md"
@@ -43,20 +45,17 @@
                         </div>
                         <div class="right ">
 
- <span class="fa-stack text-primary">
-  <i class="fa fa-circle fa-stack-2x"></i>
-  <i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
-</span>5
+                            <span class="fa-stack text-primary">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
+                            </span>5
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!--end-->
+            <div ng-show="showme">
 
-            <!--  hidden element-->
-            <div ng-show="showme"><!--{{lunch.place}} at {{lunch.time.hour}}:{{lunch.time.minute}} {{lunch.date.dayOfMonth}}
-                {{lunch.date.month}},-->
                 <div ng-repeat='(key, value) in lunch.users'>
                     <span>{{key}} :</span>
                     <div ng-repeat="user in value">{{user.nickname}}</div>
@@ -64,13 +63,27 @@
                 <button ng-click="addToGroup(lunch)">Add me</button>
                 <div style="width:500px; height:300px" id="{{lunch.lunchid}}"></div>
             </div>
-            <!--hidden element-->
         </div>
-    </div>
-    <div>
-        {{activeGroup}}
-    </div>
+        <!--<div>-->
+        <!--<ng-form <button ng-click="createLunch()">Create Lunch</button>-->
+        <!--</div>-->
+        <div>
+            <ng-form>
+                Lunch Title:
+                <input type="text" ng-model="lunchtitle"/>
+                <br/>
+                Is Public:
+                <input type="radio" name="publicchoice" value = "notpublic" ng-model="setpublic"/>
+                <input type="radio" name="publicchoice" value = "public" ng-model="setpublic"/>
+                <br/>
+            </ng-form>
+            <input type="button" value="Submit"/>
+        </div>
+        <div>
+            {{activeGroup}}
+        </div>
 
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
