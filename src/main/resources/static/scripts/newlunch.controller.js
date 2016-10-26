@@ -5,16 +5,23 @@ if (!lunchKompis.lunchlist)
     lunchKompis.lunchlist = {};
 
 lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
-
+    var lunch = {};
     $scope.createLunch = function () {
         console.log('clicked');
     }
 
-    $scope.doQuery = function (searchPlace, lunch) {
+    $scope.doQuery = function (searchPlace) {
         var query = searchPlace;
         $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q=' + encodeURI(query)).success(function (data) {
             lunch.osmid = data[0].osm_id;
             lunch.osmtype = data[0].osm_type;
+
+            // if (!(usedTitles.contains(lunch.lunchid))) {
+                $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osmtype).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osmid)).success(function (data) {
+                    init(data.lat, data.lon, 'map');
+            //         usedTitles.push(lunch.lunchid);
+                })
+            // }
         });
     }
 
