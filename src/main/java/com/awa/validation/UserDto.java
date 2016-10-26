@@ -1,6 +1,9 @@
 package com.awa.validation;
 
 import com.awa.tables.User;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserDto {
 
@@ -13,7 +16,9 @@ public class UserDto {
     private String email;
 
     public User createUser(){
-        return new User(firstName, lastName, email, nickname, password);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        return new User(firstName, lastName, email, nickname, hashedPassword);
     }
 
     public String getFirstName() {
@@ -45,6 +50,7 @@ public class UserDto {
     }
 
     public void setPassword(String password) {
+        
         this.password = password;
     }
 
@@ -75,4 +81,5 @@ public class UserDto {
                 ", email='" + email + '\'' +
                 '}';
     }
+    
 }

@@ -33,6 +33,10 @@
                     </div>
                     <div class="content">
                         <div class="name">{{lunch.title}}</div>
+
+                        <input type="text" ng-model = "searchPlace"/>
+                        <button type="button" ng-click="doQuery(searchPlace, lunch)">Submit</button>
+
                         <p class="text">{{lunch.place}} klockan {{lunch.time.hour}}:{{lunch.time.minute}}
                             den {{lunch.date.dayOfMonth}}
                             {{lunch.date.month}}</p>
@@ -50,8 +54,11 @@
                                 <i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
                             </span>5
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
 
             <div ng-show="showme">

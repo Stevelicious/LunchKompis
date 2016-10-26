@@ -42,6 +42,7 @@ public class InMemoryDB {
 				lunch.setUsers(users.get(j), "Attending");
 				lunch.setUsers(users.get(j), "Invited");
 			}
+			lunch.setHost(i+1);
 			lunches.add(lunch);
 		}
 		
@@ -51,6 +52,7 @@ public class InMemoryDB {
 			group.setCreationdate(LocalDateTime.now());
 			group.setPerm(true);
 			group.setUsers(users.subList(i,i+3));
+			group.setAdmin(i+1);
 			groupes.add(group);
 		}
 	}
