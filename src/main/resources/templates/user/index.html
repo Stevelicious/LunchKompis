@@ -2,25 +2,21 @@
 <html ng-app="lunchKompis" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Hello Spring Security</title>
+    <title>Lunchkompis</title>
     <meta charset="utf-8"/>
-    <!--    /*Mathias*/-->
-    <link rel="stylesheet" href="/css/normalize.css"/>
 
-    <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'/>
-    <!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css'/>-->
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'/>
 
-    <link rel="stylesheet" href="/css/style.css"/>
-    <!--end-->
+    <link rel="stylesheet" href="../css/normalize.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css'/>
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css'/>
-    <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'/>
-    <link rel='stylesheet prefetch'
-          href='https://raw.githubusercontent.com/nostalgiaz/bootstrap-switch/master/dist/css/bootstrap3/bootstrap-switch.css'/>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'/>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css'/>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'/>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'/>
+
+
+
 
 </head>
 
@@ -56,10 +52,10 @@
 <!-- NAVBAR Stop -->
 
 <h1>Inloggad</h1>
-<nav>
+
     <a href="#/">Alla luncher</a>
     <a href="#/newlunch">Skapa Lunch</a>
-</nav>
+
 <div class="ng-view"></div>
 
 <div class="plusmenu">
@@ -68,7 +64,7 @@
             data-target="#myModalHorizontal">
         <i class="fa fa-plus fa-lg"></i>
     </button>
-
+</div>
 
     <!-- Modal -->
     <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
@@ -164,14 +160,17 @@
 
         </div>
     </div>
-</div>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js'></script>
 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js'></script>
+<script src="/js/main.js"></script>
+<script src="/js/index.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 <script src="/scripts/OpenLayers.js"></script>

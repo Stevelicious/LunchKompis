@@ -4,22 +4,6 @@ function main() {
 (function () {
    'use strict';
 
-   /* ==============================================
-  	Testimonial Slider
-  	=============================================== */ 
-
-  	$('a.page-scroll').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-          if (target.length) {
-            $('html,body').animate({
-              scrollTop: target.offset().top - 40
-            }, 900);
-            return false;
-          }
-        }
-      });
 
     /*====================================
     Show Menu on Book
@@ -36,7 +20,7 @@ function main() {
     $('body').scrollspy({ 
         target: '.navbar-default',
         offset: 180
-    })
+    });
 
   	$(document).ready(function() {
   	  $("#team").owlCarousel({
@@ -121,21 +105,3 @@ function main() {
 
 }
 main();
-
-$("[name='my-checkbox']").bootstrapSwitch();
-
-//Select2
-$.getScript('http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js', function() {
-
-    /* dropdown and filter select */
-    var select = $('#select2').select2();
-
-    /* Select2 plugin as tagpicker */
-    $("#grupper").select2({
-        closeOnSelect: false,
-        placeholder: "Klicka för att välja grupper"
-    });
-
-}); //script
-
-$(document).ready(function() {});
