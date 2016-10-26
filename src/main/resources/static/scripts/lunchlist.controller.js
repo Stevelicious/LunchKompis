@@ -15,5 +15,10 @@ lunchKompis.lunchlist.AppController = function ($scope, $http, $window){
         $http.put('/api/groups/' + group.lunchid).success(function(data) {
         });
         $window.location.reload();
-    }
+    };
+    $scope.createLunch = function() {
+        $http.post('/api/groups/').success(function(data) {
+            console.log(data);
+        });
+    };
 }

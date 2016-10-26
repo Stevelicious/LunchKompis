@@ -1,23 +1,13 @@
-if (!lunchApp)
-    var lunchApp = {};
+if (!lunchKompis)
+    var lunchKompis = {};
 
-if (!lunchApp.controllers)
-    lunchApp.controllers = {};
+if (!lunchKompis.lunchlist)
+    lunchKompis.lunchlist = {};
 
+lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
 
-lunchApp.controllers.MapController = function ($scope, $http) {
-    var usedTitles = [];
-    Array.prototype.contains = function (obj) {
-        var i = this.length;
-        while (i--) {
-            if (this[i] == obj) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    $scope.createLunch = function (lunchtitle, place) {
+    $scope.createLunch = function () {
+        console.log('clicked');
     }
 
     $scope.doQuery = function (searchPlace, lunch) {
@@ -28,14 +18,6 @@ lunchApp.controllers.MapController = function ($scope, $http) {
         });
     }
 
-    $scope.setLoc = function (lunch) {
-        if (!(usedTitles.contains(lunch.lunchid))) {
-            $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osmtype).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osmid)).success(function (data) {
-                init(data.lat, data.lon, lunch.lunchid);
-                usedTitles.push(lunch.lunchid);
-            })
-        }
-    }
 
     var zoom = 18;
     var map;
@@ -68,5 +50,6 @@ lunchApp.controllers.MapController = function ($scope, $http) {
             marker.addMarker(new OpenLayers.Marker(lonLat, icon));
         }
     }
+
 
 };

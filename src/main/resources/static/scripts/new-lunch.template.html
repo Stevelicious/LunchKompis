@@ -1,0 +1,13 @@
+<div>
+    <ng-form>
+        Lunch Title:
+        <input type="text" ng-model="lunchtitle"/>
+        <input type="text" ng-model="place" />
+        <br/>
+        Is Public: yes/no
+        <input type="radio" name="publicchoice" value = "notpublic" ng-model="setpublic"/>
+        <input type="radio" name="publicchoice" value = "public" ng-model="setpublic"/>
+        <br/>
+        <input type="button" ng-click="createLunch()"/>
+    </ng-form>
+</div>
