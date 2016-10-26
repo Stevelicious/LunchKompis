@@ -26,8 +26,11 @@ public class Lunch {
 	LocalTime time;
 	boolean isPublic;
 	String place;
+	long host;
+	
 
-//	Map<User, String> users = new HashMap<>();
+	
+	//	Map<User, String> users = new HashMap<>();
 //	List<User> users = new ArrayList<>();
 	Map<String, ArrayList<User>> users = new HashMap<>();
 
@@ -81,6 +84,13 @@ public class Lunch {
 		this.place = place;
 	}
 	
+	public long getHost() {
+		return host;
+	}
+	
+	public void setHost(long host) {
+		this.host = host;
+	}
 	public Map<String, ArrayList<User>> getUsers() {
 		return users;
 	}
