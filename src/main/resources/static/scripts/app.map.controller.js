@@ -17,6 +17,9 @@ lunchApp.controllers.MapController = function ($scope, $http) {
         return false;
     }
 
+    $scope.createLunch = function (lunchtitle, place) {
+    }
+
     $scope.doQuery = function (searchPlace, lunch) {
         var query = searchPlace;
         $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q=' + encodeURI(query)).success(function (data) {
