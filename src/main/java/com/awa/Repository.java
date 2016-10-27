@@ -4,7 +4,9 @@ import com.awa.tables.Lunch;
 import com.awa.tables.User;
 import com.awa.tables.UserGroup;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Steven Hu on 2016-10-19.
@@ -49,7 +51,7 @@ public interface Repository {
 	
 	long addGroupToLunch(long lunchID, long groupID);
 
+	Map<String, ArrayList<User>> getUsersInLunch(long lunchID);
 
-	
 	
 }

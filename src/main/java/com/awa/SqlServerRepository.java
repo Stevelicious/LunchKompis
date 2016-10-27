@@ -11,7 +11,9 @@ import java.sql.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class SqlServerRepository implements Repository {
@@ -233,6 +235,7 @@ public class SqlServerRepository implements Repository {
 			
 			ResultSet rs = ps.executeQuery();
 			List<Lunch> lunchList = new ArrayList<Lunch>();
+			System.out.println("in public lunchlistsql");
 			while (rs.next()) {
 				lunchList.add(parseLunch(rs));
 			}
@@ -361,7 +364,7 @@ public class SqlServerRepository implements Repository {
 	@Override
 	public long addUserToLunch(long lunchID, long userID) {
 		try (Connection conn = dataSource.getConnection();
-		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchConnector] (Lunch_id, User_id )  VALUES (?,? )")) {
+		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchConnector] (Lunch_id, User_id, isConfirmed )  VALUES (?,?, 1 )")) {
 			
 			ps.setLong(1, lunchID);
 			ps.setLong(2, userID);
@@ -422,9 +425,63 @@ public class SqlServerRepository implements Repository {
 		
 		
 	}
-	
+
+	@Override
+	public Map<String, ArrayList<User>> getUsersInLunch(long lunchID){
+
+		try (Connection conn = dataSource.getConnection();
+			 PreparedStatement ps = conn.prepareStatement("SELECT * FROM  [dbo].[LunchConnector] AS lc JOIN [dbo].[Users] as U ON lc.User_id = U.Userid WHERE lc.Lunch_id = ? ")) {
+
+			ps.setLong(1, lunchID);
+
+			Map<String, ArrayList<User>> userMap = new HashMap<>();
+
+
+			ResultSet rs = ps.executeQuery();
+			if (rs == null) {
+
+				System.out.println("error is 0");
+			}
+
+			while(rs.next()){
+
+				if(rs.getBoolean("isConfirmed")){
+					ArrayList<User> userlist;
+					if (userMap.get("Attending") == null){
+						userlist = new ArrayList<>();
+					}else{
+						userlist = userMap.get("Attending");
+					}
+					userlist.add(parseUser(rs));
+					userMap.put("Attending",userlist);
+				}else{
+					ArrayList<User> userlist;
+					if (userMap.get("Invited") == null){
+						userlist = new ArrayList<>();
+					}else{
+						userlist = userMap.get("Invited");
+					}
+					userlist.add(parseUser(rs));
+					userMap.put("Invited",userlist);
+				}
+			}
+
+			return userMap;
+
+
+		} catch (SQLException e) {
+			throw new LunchRepositoryException(e);
+		}
+
+
+
+
+	}
+
+
 	private User parseUser(ResultSet rs) throws SQLException {
 		User user = new User();
+		user.setUserid(rs.getLong("userid"));
 		user.setFirstname(rs.getString("firstname"));
 		user.setLastname(rs.getString("lastname"));
 		user.setNickname(rs.getString("username"));
@@ -449,11 +506,13 @@ public class SqlServerRepository implements Repository {
 
 		lunch.setLunchid(rs.getLong("Lunchid"));
 		lunch.setTitle(rs.getString("title"));
-		lunch.setDate(rs.getDate("date").toLocalDate());
-		lunch.setTime(rs.getTime("time").toLocalTime());
+		lunch.setDate(rs.getDate("date").toString());
+		lunch.setTime(rs.getTime("time").toString());
 		lunch.setPublic(rs.getBoolean("isPublic"));
 		lunch.setPlace(rs.getString("place"));
 		lunch.setHost(rs.getLong("host"));
+		lunch.setUsers(getUsersInLunch(lunch.getLunchid()));
+
 		lunch.setOsm_id(rs.getInt("osm_id"));
 		lunch.setOsm_type(rs.getString("osm_type"));
 
