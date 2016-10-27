@@ -99,7 +99,7 @@ body {
 .lunch-ui .content .name {
     font-size: 21px;
     font-weight: 900;
-    margin-bottom: px
+    margin-bottom: 1px;
 }
 
 .lunch-ui .content .text {
@@ -182,8 +182,54 @@ body {
     top: 20%;
     left: 5%;
 }
+/* Cell code */
 
+.cell {
+    width: 50px; height: 50px;
+    background-color: red;
+    border-top: 50px solid red;
+    border-bottom: 50px solid red;
+    margin: 0 50px;
+    position: relative;
+    box-shadow: inset 0 4px 0 -2px white,
+    inset 0 -4px 0 -2px white;
+}
+.cell::before {
+    content: '';
+    width: 50px; height: 50px;
+    background-color: red;
+    border-top: 50px solid red;
+    border-bottom: 50px solid red;
+    margin: 0;
+    position: absolute; left: -52px; top: -50px;
+    box-shadow: inset 0 4px 0 -2px white,
+    inset 0 -4px 0 -2px white;
+}
+.cell::after {
+    content: '';
+    width: 50px; height: 50px;
+    background-color: red;
+    border-top: 50px solid red;
+    border-bottom: 50px solid red;
+    margin: 0;
+    position: absolute; right: -52px; top: -50px;
+    box-shadow: inset 0 4px 0 -2px white,
+    inset 0 -4px 0 -2px white;
+}
 
+.clear {
+    clear: both;
+}
+
+#grid {
+    width: 90%;
+}
+
+.grid-element {
+    width: 30%;
+    height: 30%;
+    float: left;
+}
 
 
 /* Modal css */
