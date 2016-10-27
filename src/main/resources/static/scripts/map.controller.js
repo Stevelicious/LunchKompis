@@ -4,7 +4,7 @@ if (!lunchKompis)
 if (!lunchKompis.lunchlist)
     lunchKompis.lunchlist = {};
 
-lunchKompis.lunchlist.MapController = function ($scope, $http) {
+lunchKompis.lunchlist.MapController = function ($scope, $http, $window) {
     var usedTitles = [];
     Array.prototype.contains = function (obj) {
         var i = this.length;
@@ -31,7 +31,7 @@ lunchKompis.lunchlist.MapController = function ($scope, $http) {
         console.log(lunch.lunchid);
         $http.post('/api/groups/' + lunch.lunchid).success(function(data) {
         });
-        // $window.location.reload();
+        $window.location.reload();
     };
 
     var zoom = 18;

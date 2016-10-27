@@ -23,11 +23,9 @@ public class User{
     private Date creation_date;
 
     public User() {
-	    userid = ++count;
     }
 
     public User(String firstname, String lastname, String email, String nickname, String password) {
-	    userid = ++count;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -42,6 +40,8 @@ public class User{
     public long getUserid() {
         return userid;
     }
+
+
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;

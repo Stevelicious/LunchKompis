@@ -34,8 +34,8 @@ public class InMemoryDB {
 		for (int i = 0; i < 5; i++) {
 			Lunch lunch = new Lunch();
 			lunch.setTitle("Lunch"+i);
-			lunch.setDate(LocalDate.now());
-			lunch.setTime(LocalTime.now().plusHours(i));
+			lunch.setDate(LocalDate.now().toString());
+			lunch.setTime(LocalTime.now().plusHours(i).toString());
 			lunch.setPlace("Place"+i);
 			lunch.setPublic(true);
 //			for (int j = 1; j < i + 2; j++) {
