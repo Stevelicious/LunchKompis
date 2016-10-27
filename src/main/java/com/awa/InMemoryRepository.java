@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Steven Hu on 2016-10-18.
@@ -63,7 +64,12 @@ public class InMemoryRepository implements Repository {
 		}
 		return null;
 	}
-	
+
+	@Override
+	public Map<String, ArrayList<User>> getUsersInLunch(long lunchID) {
+		return null;
+	}
+
 	@Override
 	public List<User> getUsersInGroup(long groupID) {
 		return getGroup(groupID).getUsers();

@@ -27,9 +27,12 @@ public class Lunch {
 	boolean isPublic;
 	String place;
 	long host;
+
+	@Transient
+	Map<String, ArrayList<User>> users = new HashMap<>();
+
 	String osm_type;
 	int osm_id;
-//	Map<String, ArrayList<User>> users = new HashMap<>();
 
 	public Lunch() {
 
@@ -106,30 +109,15 @@ public class Lunch {
 	public void setHost(long host) {
 		this.host = host;
 	}
-//	public Map<String, ArrayList<User>> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(User user, String status) {
-//		ArrayList<User> userArrayList = new ArrayList<>();
-//
-//		if(users.containsKey(status)){
-//			userArrayList = users.get(status);
-//		}
-//		if(userArrayList.isEmpty()){
-//			userArrayList.add(0, user);
-//		}else{
-//			userArrayList.add(userArrayList.size(), user);
-//		}
-//		users.put(status, userArrayList);
-//		for (String list: users.keySet()) {
-//			System.out.println(list + " contains:");
-//			for (User user1: users.get(list)) {
-//				System.out.println(user1);
-//			}
-//		}
-//	}
+
+	public Map<String, ArrayList<User>> getUsers() {
+		return users;
+	}
 	
+	public void setUsers(Map<String, ArrayList<User>> users) {
+		this.users = users;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

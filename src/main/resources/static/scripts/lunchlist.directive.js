@@ -11,6 +11,6 @@ lunchKompis.lunchlist.lunchListDirective = function () {
         },
         restrict: 'A',
         templateUrl: '../../scripts/lunch-template.html',
-        controller: ['$scope', '$http', lunchKompis.lunchlist.MapController]
+        controller: ['$scope', '$http', '$window', lunchKompis.lunchlist.MapController]
     }
 };
