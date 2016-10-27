@@ -1,3 +1,4 @@
+<div>
 <div class="lunch-ui-wrap">
     <div class="lunch-ui">
         <div class="header">
@@ -17,6 +18,7 @@
                 <button type="button" class="btn btn-primary btn-md"
                         ng-click="showme=!showme; setLoc(lunch)">ÖPPNA!
                 </button>
+                <button ng-click="addToGroup(lunch)">Add me</button>
             </div>
             <div class="right ">
 
@@ -41,5 +43,6 @@
     <div style="width:500px; height:300px" id="{{lunch.lunchid}}"></div>
 </div>
 <!--hidden element-->
+</div>
 </div>
 </div>

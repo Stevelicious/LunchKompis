@@ -33,22 +33,23 @@ public class LunchGroupApiController {
     @ResponseBody
     List<Lunch> getLunchGroups() throws JsonProcessingException {
 
-        return repo.getPublicLunchList();
+        return sqlRepo.getPublicLunchList();
     }
 
 
-    @PutMapping("/api/groups/{id}")
+    @PostMapping("/api/groups/{id}")
     public ModelAndView addUserToGroup(HttpSession session, @PathVariable("id") Long lunchid) {
 
         System.out.println("userid = " + session.getAttribute("userid") + ", groupid = " + lunchid);
-        repo.addUserToLunch(lunchid, Long.parseLong(session.getAttribute("userid").toString()));
+        sqlRepo.addUserToLunch(lunchid, Long.parseLong(session.getAttribute("userid").toString()));
         return new ModelAndView("user/index");
     }
 
-    @PostMapping("/api/groups")
+    @PostMapping("/api/groups/new")
     public String createLunchInDb()
 
     {
+        System.out.println("in createLunch");
         Lunch lunch = new Lunch();
         lunch.setHost(1);
         lunch.setTitle("Lunch User");
@@ -56,6 +57,8 @@ public class LunchGroupApiController {
         lunch.setTime(LocalTime.now().plusHours(5));
         lunch.setPlace("vegabaren");
         lunch.setPublic(true);
+        lunch.setOsm_id(369976808);
+        lunch.setOsm_type("N");
 
         System.out.println(sqlRepo.createLunch(lunch));
         return "Sucess";

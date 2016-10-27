@@ -48,6 +48,8 @@ public interface Repository {
 	long removeUserFromLunch(long lunchID, long userID);
 	
 	long addGroupToLunch(long lunchID, long groupID);
+
+
 	
 	
 }

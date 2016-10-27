@@ -16,22 +16,23 @@ lunchKompis.lunchlist.MapController = function ($scope, $http) {
         return false;
     }
 
-    $scope.doQuery = function (searchPlace, lunch) {
-        var query = searchPlace;
-        $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q=' + encodeURI(query)).success(function (data) {
-            lunch.osmid = data[0].osm_id;
-            lunch.osmtype = data[0].osm_type;
-        });
-    }
-
     $scope.setLoc = function (lunch) {
+
         if (!(usedTitles.contains(lunch.lunchid))) {
-            $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osmtype).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osmid)).success(function (data) {
+            $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osm_type).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osm_id)).success(function (data) {
                 init(data.lat, data.lon, lunch.lunchid);
                 usedTitles.push(lunch.lunchid);
             })
         }
     }
+
+    $scope.addToGroup = function(lunch) {
+        console.log("clicked add to group");
+        console.log(lunch.lunchid);
+        $http.post('/api/groups/' + lunch.lunchid).success(function(data) {
+        });
+        // $window.location.reload();
+    };
 
     var zoom = 18;
     var map;
@@ -64,6 +65,5 @@ lunchKompis.lunchlist.MapController = function ($scope, $http) {
             marker.addMarker(new OpenLayers.Marker(lonLat, icon));
         }
     }
-
-
+    
 };
