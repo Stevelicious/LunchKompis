@@ -11,10 +11,11 @@ lunchKompis.lunchlist.AppController = function ($scope, $http, $window){
     $http.get('/api/groups').success(function(data) {
         $scope.lunchgroups = data;
     });
-    $scope.addToGroup = function(group) {
-        $http.put('/api/groups/' + group.lunchid).success(function(data) {
+    $scope.addToGroup = function(lunch) {
+        console.log("clicked add to group");
+        $http.put('/api/groups/' + lunch.lunchid).success(function(data) {
         });
-        $window.location.reload();
+        // $window.location.reload();
     };
     $scope.createLunch = function() {
         $http.post('/api/groups/').success(function(data) {

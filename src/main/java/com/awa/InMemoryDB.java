@@ -38,10 +38,10 @@ public class InMemoryDB {
 			lunch.setTime(LocalTime.now().plusHours(i));
 			lunch.setPlace("Place"+i);
 			lunch.setPublic(true);
-			for (int j = 1; j < i + 2; j++) {
-				lunch.setUsers(users.get(j), "Attending");
-				lunch.setUsers(users.get(j), "Invited");
-			}
+//			for (int j = 1; j < i + 2; j++) {
+//				lunch.setUsers(users.get(j), "Attending");
+//				lunch.setUsers(users.get(j), "Invited");
+//			}
 			lunch.setHost(i+1);
 			lunches.add(lunch);
 		}
