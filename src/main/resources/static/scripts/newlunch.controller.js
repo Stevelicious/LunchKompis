@@ -18,9 +18,29 @@ lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
         return false;
     }
 
-    $scope.createLunch = function () {
-        $http.post('/api/groups/new').success(function(data) {
+    $scope.createLunch = function (lunchtitle, place) {
+
+        var data = {};
+        data.lunchid = 1;
+        data.title = lunchtitle;
+        data.date = null
+        data.time = null
+        data.isPublic = 1
+        data.place = place;
+        data.host = 1;
+        data.osm_type = "N";
+        data.osm_id = 131313131
+
+        $http.post('/api/groups/new', data).success(function (data2) {
+            console.log(data)
         });
+        // $http.post({
+        //     url: '/api/groups/new',
+        //     method: "POST",
+        //     data: {lunchtitle: lunchtitle, place: place}
+        // });
+        // $http.post('/api/groups/new').success(function(data) {
+        // });
     }
 
     $scope.doQuery = function (searchPlace) {
