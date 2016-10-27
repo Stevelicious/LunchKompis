@@ -235,6 +235,7 @@ public class SqlServerRepository implements Repository {
 			
 			ResultSet rs = ps.executeQuery();
 			List<Lunch> lunchList = new ArrayList<Lunch>();
+			System.out.println("in public lunchlistsql");
 			while (rs.next()) {
 				lunchList.add(parseLunch(rs));
 			}
@@ -363,7 +364,7 @@ public class SqlServerRepository implements Repository {
 	@Override
 	public long addUserToLunch(long lunchID, long userID) {
 		try (Connection conn = dataSource.getConnection();
-		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchConnector] (Lunch_id, User_id )  VALUES (?,? )")) {
+		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchConnector] (Lunch_id, User_id, isConfirmed )  VALUES (?,?, 1 )")) {
 			
 			ps.setLong(1, lunchID);
 			ps.setLong(2, userID);
@@ -480,6 +481,7 @@ public class SqlServerRepository implements Repository {
 
 	private User parseUser(ResultSet rs) throws SQLException {
 		User user = new User();
+		user.setUserid(rs.getLong("userid"));
 		user.setFirstname(rs.getString("firstname"));
 		user.setLastname(rs.getString("lastname"));
 		user.setNickname(rs.getString("username"));
