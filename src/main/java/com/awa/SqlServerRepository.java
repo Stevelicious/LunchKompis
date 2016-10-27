@@ -506,8 +506,8 @@ public class SqlServerRepository implements Repository {
 
 		lunch.setLunchid(rs.getLong("Lunchid"));
 		lunch.setTitle(rs.getString("title"));
-		lunch.setDate(rs.getDate("date").toLocalDate());
-		lunch.setTime(rs.getTime("time").toLocalTime());
+		lunch.setDate(rs.getDate("date").toString());
+		lunch.setTime(rs.getTime("time").toString());
 		lunch.setPublic(rs.getBoolean("isPublic"));
 		lunch.setPlace(rs.getString("place"));
 		lunch.setHost(rs.getLong("host"));

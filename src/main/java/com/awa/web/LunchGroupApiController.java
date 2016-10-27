@@ -49,11 +49,12 @@ public class LunchGroupApiController {
     }
 
     @PostMapping("/api/groups/new")
-    public String createLunchInDb(@RequestBody String data) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Lunch lunch = mapper.readValue(data, Lunch.class);
-        System.out.println(lunch);
-        System.out.println(data);
+    public String createLunchInDb(@RequestBody Lunch lunch) throws IOException {
+//        ObjectMapper mapper = new ObjectMapper();
+//        Lunch lunch = mapper.readValue(data, Lunch.class);
+//        System.out.println(lunch);
+//        System.out.println(data);
+        sqlRepo.createLunch(lunch);
         return "1";
     }
 

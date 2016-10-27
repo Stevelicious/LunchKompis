@@ -3,6 +3,7 @@ package com.awa.tables;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,16 +75,18 @@ public class Lunch {
 		return date;
 	}
 	
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setDate(String date) {
+		LocalDate localDate = LocalDate.parse(date);
+		this.date = localDate;
 	}
 	
 	public LocalTime getTime() {
 		return time;
 	}
 	
-	public void setTime(LocalTime time) {
-		this.time = time;
+	public void setTime(String time) {
+		LocalTime localTime = LocalTime.parse(time);
+		this.time = localTime;
 	}
 	
 	public boolean isPublic() {
