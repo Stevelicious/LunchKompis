@@ -7,10 +7,12 @@
 
     <link rel="stylesheet" href="../css/normalize.css"/>
     <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/style-user-index-navbar.css"/>
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css'/>
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css'/>
     <link rel='stylesheet prefetch'
           href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.3.0/balloon.min.css"/>
     <link rel='stylesheet prefetch'
           href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css'/>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'/>
@@ -20,54 +22,47 @@
 
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
-
+                <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="" alt=""/></a>
+            <img src="/img/lunchkompisloggo.png" alt="lunchlogga"/>
         </div>
-
         <div class="navbar-collapse collapse navbar-right">
 
             <ul class="nav navbar-nav">
 
-                <li class="hover"><a href="#">KONTAKT OSS</a></li>
+                <li class="hover"><a href="#">KONTAKTA OSS</a></li>
 
                 <li><a href="#">KONTO</a></li>
-
-                <li><a href="/">LOGGA UT</a></li>
-
-
+                <li><a href="#/">LUNCHER</a></li>
+                <li><a href="/lout">LOGGA UT</a></li>
             </ul>
 
         </div>
+
     </div>
+</nav>
 
-</div>
 <!-- NAVBAR Stop -->
-
-<h1>Inloggad</h1>
-
-<a href="#/">Alla luncher</a>
-<!--<a href="#/newlunch" data-toggle="modal" data-target="#myModalHorizontal">Skapa Lunch</a>-->
 
 <div class="ng-view"></div>
 
 <div class="plusmenu">
-    <a href="#/newlunch">
-        <button type="button" class="btn btn-primary btn-circle btn-xl" data-toggle="modal"
-                data-target="#myModalHorizontal">
-            <i class="fa fa-plus fa-lg"></i>
-        </button>
-    </a>
+    <!--<a href="#/newlunch">-->
+    <button type="button" class="btn btn-primary btn-circle btn-xl" data-toggle="modal"
+            data-target="#myModalHorizontal">
+        <i class="fa fa-plus fa-lg"></i>
+    </button>
+    <!--</a>-->
 </div>
-
-<!--&lt;!&ndash; Modal-->
+<!-- Modal -->
 <div ng-controller="newLunchCtrl" class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -92,14 +87,12 @@
                         <label class="col-sm-2 control-label"
                                for="rubrik">Rubrik till din lunch</label>
                         <div class="col-sm-10">
-                            <input type="text" ng-model="lunchtitle" class="form-control"
+                            <input type="text" class="form-control"
                                    id="rubrik" placeholder="Rubrik"/>
                         </div>
                     </div>
 
                     <!-- End titel -->
-
-                    <!--  -->
                     <div class="form-group col-sm-10">
                         <div id="custom-search-input">
 
@@ -108,10 +101,10 @@
                                 <input type="text" class="form-control input-sm" ng-model="place"
                                        name="search" id="search" placeholder="Sök efter resturang"/>
                                 <span class="input-group-btn">
-                        <button class="btn btn-info" type="button" ng-click="doQuery(searchPlace, lunch)">
-                            <i class="fa fa-search fa-2x"></i>
-                        </button>
-                    </span>
+                            <button class="btn btn-info" type="button" ng-click="doQuery(searchPlace, lunch)">
+                                <i class="fa fa-search fa-2x"></i>
+                            </button>
+                        </span>
                             </div>
                         </div>
                         <div>Vald restaurang: {{chosenPlace}}</div>
@@ -119,19 +112,20 @@
 
                     <!--Datum & Tid-->
 
-                    <div class="form-group col-sm-8">
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control"/>
-                                <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="form-group col-sm-8">-->
+                    <!--<div class="form-group">-->
+                    <!--<div class='input-group date' id='datetimepicker1'>-->
+                    <!--<input type='text' class="form-control"/>-->
+                    <!--<span class="input-group-addon">-->
+                    <!--<span class="glyphicon glyphicon-calendar"></span>-->
+                    <!--</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
 
 
                     <!-- Grupper -->
+
 
                     <!--                    <div class="form-group">
                                             <label class="col-sm-2 control-label"
@@ -146,44 +140,44 @@
                                             </div>
 
                                         </div>-->
-
-
                     <!-- knapp för grupper -->
                     <div class="form-group">
+
 
                         <label class="col-sm-2 control-label"
                                for="public">Synligt endast för valda grupper</label>
 
                         <div class="col-sm-10">
-                            <!--<input type="checkbox"  id="public" name="my-checkbox" />-->
+                            <!--<input type="checkbox"  id="public" name="my-checkbox" checkbox="checked"/>-->
                             <input type="checkbox" id="public" ng-model="checkboxmodel.value"/>
-
                         </div>
 
-                        <!-- Modal Footer -->
-                        <div class="modal-footer">
-                            <a href="#/">
-                                <button ng-click="clickme()" type="button" class="btn btn-default"
-                                        data-dismiss="modal">
-                                    Stäng
-                                </button>
-                            </a>
-                            <button type="button" ng-click="createLunch()" class="btn btn-primary">Skapa Lunch
-                            </button>
-                        </div>
                     </div>
+
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <a href="#/">
+                            <button ng-click="clickme()" type="button" class="btn btn-default"
+                                    data-dismiss="modal">
+                                Stäng
+                            </button>
+                        </a>
+                        <button type="button" ng-click="createLunch()" class="btn btn-primary">Skapa Lunch
+                        </button>
+                    </div>
+
+
                 </form>
+
             </div>
         </div>
 
     </div>
 </div>
 
-
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-
 <script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'></script>
-
 <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js'></script>
 <script src="/js/main.js"></script>
 <script src="/js/index.js"></script>

@@ -48,9 +48,9 @@ lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
         console.log(lunch.osmid);
         console.log( lunch.osmtype);
 
-    /*    $http.post('/api/groups/new', data).success(function (data2) {
+        $http.post('/api/groups/new', data).success(function (data) {
             console.log(data)
-        });*/
+        });
     }
 
     $scope.doQuery = function (searchPlace) {

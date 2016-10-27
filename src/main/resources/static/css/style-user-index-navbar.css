@@ -76,7 +76,8 @@ ul, ol{
 	transition: all 0.8s;
 }
 #tf-menu.navbar-default {
-	background-color: rgba(248, 248, 248, 0);
+	background-color: black;
+	opacity: 0.8;
 	border-color: rgba(231, 231, 231, 0);
 }
 #tf-menu a.navbar-brand {
@@ -102,6 +103,8 @@ ul, ol{
 	color: #FCAC45 !important;
 	background-color: transparent;
 	font-weight: 700;
+
+
 }
 
 .navbar-toggle {
@@ -698,4 +701,5 @@ ul.dropdown-lr {
 		-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	}
+
 }
