@@ -11,7 +11,9 @@ import java.sql.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class SqlServerRepository implements Repository {
@@ -420,7 +422,60 @@ public class SqlServerRepository implements Repository {
 		
 		
 	}
-	
+
+	@Override
+	public Map<String, ArrayList<User>> getUsersInLunch(long lunchID){
+
+		try (Connection conn = dataSource.getConnection();
+			 PreparedStatement ps = conn.prepareStatement("SELECT * FROM  [dbo].[LunchConnector] AS lc JOIN [dbo].[Users] as U ON lc.User_id = U.Userid WHERE lc.Lunch_id = ? ")) {
+
+			ps.setLong(1, lunchID);
+
+			Map<String, ArrayList<User>> userMap = new HashMap<>();
+
+
+			ResultSet rs = ps.executeQuery();
+			if (rs == null) {
+
+				System.out.println("error is 0");
+			}
+
+			while(rs.next()){
+
+				if(rs.getBoolean("isConfirmed")){
+					ArrayList<User> userlist;
+					if (userMap.get("Attending") == null){
+						userlist = new ArrayList<>();
+					}else{
+						userlist = userMap.get("Attending");
+					}
+					userlist.add(parseUser(rs));
+					userMap.put("Attending",userlist);
+				}else{
+					ArrayList<User> userlist;
+					if (userMap.get("Invited") == null){
+						userlist = new ArrayList<>();
+					}else{
+						userlist = userMap.get("Invited");
+					}
+					userlist.add(parseUser(rs));
+					userMap.put("Invited",userlist);
+				}
+			}
+
+			return userMap;
+
+
+		} catch (SQLException e) {
+			throw new LunchRepositoryException(e);
+		}
+
+
+
+
+	}
+
+
 	private User parseUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setFirstname(rs.getString("firstname"));
@@ -451,6 +506,7 @@ public class SqlServerRepository implements Repository {
 		lunch.setPublic(rs.getBoolean("isPublic"));
 		lunch.setPlace(rs.getString("place"));
 		lunch.setHost(rs.getLong("host"));
+		lunch.setUsers(getUsersInLunch(lunch.getLunchid()));
 		return lunch;
 	}
 }

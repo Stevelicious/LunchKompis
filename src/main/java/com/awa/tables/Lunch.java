@@ -32,6 +32,7 @@ public class Lunch {
 	
 	//	Map<User, String> users = new HashMap<>();
 //	List<User> users = new ArrayList<>();
+	@Transient
 	Map<String, ArrayList<User>> users = new HashMap<>();
 
 	
@@ -95,24 +96,8 @@ public class Lunch {
 		return users;
 	}
 	
-	public void setUsers(User user, String status) {
-		ArrayList<User> userArrayList = new ArrayList<>();
-
-		if(users.containsKey(status)){
-			userArrayList = users.get(status);
-		}
-		if(userArrayList.isEmpty()){
-			userArrayList.add(0, user);
-		}else{
-			userArrayList.add(userArrayList.size(), user);
-		}
-		users.put(status, userArrayList);
-		for (String list: users.keySet()) {
-			System.out.println(list + " contains:");
-			for (User user1: users.get(list)) {
-				System.out.println(user1);
-			}
-		}
+	public void setUsers(Map<String, ArrayList<User>> users) {
+		this.users = users;
 	}
 	
 	@Override
