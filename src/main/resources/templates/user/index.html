@@ -54,20 +54,21 @@
 <h1>Inloggad</h1>
 
 <a href="#/">Alla luncher</a>
-<a href="#/newlunch">Skapa Lunch</a>
+<!--<a href="#/newlunch" data-toggle="modal" data-target="#myModalHorizontal">Skapa Lunch</a>-->
 
 <div class="ng-view"></div>
 
 <div class="plusmenu">
-
-    <button type="button" class="btn btn-primary btn-circle btn-xl" data-toggle="modal"
-            data-target="#myModalHorizontal">
-        <i class="fa fa-plus fa-lg"></i>
-    </button>
+    <a href="#/newlunch">
+        <button type="button" class="btn btn-primary btn-circle btn-xl" data-toggle="modal"
+                data-target="#myModalHorizontal">
+            <i class="fa fa-plus fa-lg"></i>
+        </button>
+    </a>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
+<!--&lt;!&ndash; Modal-->
+<div ng-controller="newLunchCtrl" class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -91,18 +92,20 @@
                         <label class="col-sm-2 control-label"
                                for="rubrik">Rubrik till din lunch</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"
+                            <input type="text" ng-model="lunchtitle" class="form-control"
                                    id="rubrik" placeholder="Rubrik"/>
                         </div>
                     </div>
 
                     <!-- End titel -->
+
+                    <!--  -->
                     <div class="form-group col-sm-10">
                         <div id="custom-search-input">
 
                             <div class="input-group ">
 
-                                <input type="text" class="form-control input-sm" ng-model="searchPlace"
+                                <input type="text" class="form-control input-sm" ng-model="place"
                                        name="search" id="search" placeholder="Sök efter resturang"/>
                                 <span class="input-group-btn">
                         <button class="btn btn-info" type="button" ng-click="doQuery(searchPlace, lunch)">
@@ -111,47 +114,62 @@
                     </span>
                             </div>
                         </div>
+                        <div>Vald restaurang: {{chosenPlace}}</div>
+                    </div>
+
+                    <!--Datum & Tid-->
+
+                    <div class="form-group col-sm-8">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                            </div>
+                        </div>
                     </div>
 
 
                     <!-- Grupper -->
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label"
-                               for="grupper">Välj vilka som ska se ditt lunch förslag</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" name="grupper" id="grupper" multiple="multiple">
-                                <option value="1">Academy Java</option>
-                                <option value="2">Academy C#.What</option>
-                                <option value="3">Paradise Hotel</option>
+                    <!--                    <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   for="grupper">Välj vilka som ska se ditt lunchförslag</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" name="grupper" id="grupper" multiple="multiple">
+                                                    <option value="1">Academy Java</option>
+                                                    <option value="2">Academy C#.What</option>
+                                                    <option value="3">Paradise Hotel</option>
 
-                            </select>
-                        </div>
+                                                </select>
+                                            </div>
 
-                    </div>
+                                        </div>-->
 
 
                     <!-- knapp för grupper -->
                     <div class="form-group">
 
                         <label class="col-sm-2 control-label"
-                               for="grupper">Synligt endast för valda grupper</label>
+                               for="public">Synligt endast för valda grupper</label>
+
                         <div class="col-sm-10">
-                            <input type="checkbox" name="my-checkbox" checkbox="checked"/>
+                            <!--<input type="checkbox"  id="public" name="my-checkbox" />-->
+                            <input type="checkbox" id="public" ng-model="checkboxmodel.value"/>
 
                         </div>
 
-
                         <!-- Modal Footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">
-                                Stäng
+                            <a href="#/">
+                                <button ng-click="clickme()" type="button" class="btn btn-default"
+                                        data-dismiss="modal">
+                                    Stäng
+                                </button>
+                            </a>
+                            <button type="button" ng-click="createLunch()" class="btn btn-primary">Skapa Lunch
                             </button>
-                            <button type="button" class="btn btn-primary">
-                                Skapa Lunch
-                            </button>
-
                         </div>
                     </div>
                 </form>
@@ -160,9 +178,6 @@
 
     </div>
 </div>
-
-
-
 
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
@@ -179,7 +194,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 <script src="/scripts/OpenLayers.js"></script>
 <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-
 
 <script src="/scripts/lunchlist.controller.js"></script>
 <script src="/scripts/map.controller.js"></script>

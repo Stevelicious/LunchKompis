@@ -6,6 +6,18 @@ if (!lunchKompis.lunchlist)
 
 lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
     var lunch = {};
+    $scope.lunchtitle = "";
+    $scope.place = "";
+
+    $scope.chosenPlace = "";
+    $scope.checkboxmodel = {
+        value : true
+    };
+
+    // $scope.setPublic = function () {
+    //     $scope.public = !$scope.public;
+    //     console.log($scope.public)
+    // }
 
     var usedTitles = [];
     Array.prototype.contains = function (obj) {
@@ -19,42 +31,43 @@ lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
     }
 
     $scope.createLunch = function (lunchtitle, place) {
-
         var data = {};
-        data.lunchid = 1;
-        data.title = lunchtitle;
+        // data.lunchid = 1;
+        data.title = $scope.lunchtitle;
         data.date = '2016-10-25'
         data.time = '13:00'
-        data.public = true
-        data.place = place;
+        data.public = $scope.checkboxmodel.value,
+        data.place = $scope.place;
         data.host = 1;
-        data.osm_type = "N";
-        data.osm_id = 131313131
+        data.osm_type = lunch.osmtype;
+        data.osm_id = lunch.osmid;
 
-        $http.post('/api/groups/new', data).success(function (data2) {
+        console.log($scope.lunchtitle);
+        console.log($scope.place);
+        console.log($scope.checkboxmodel.value);
+        console.log(lunch.osmid);
+        console.log( lunch.osmtype);
+
+    /*    $http.post('/api/groups/new', data).success(function (data2) {
             console.log(data)
-        });
-        // $http.post({
-        //     url: '/api/groups/new',
-        //     method: "POST",
-        //     data: {lunchtitle: lunchtitle, place: place}
-        // });
-        // $http.post('/api/groups/new').success(function(data) {
-        // });
+        });*/
     }
 
     $scope.doQuery = function (searchPlace) {
         var query = searchPlace;
-        $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q=' + encodeURI(query)).success(function (data) {
+            $http.get('http://nominatim.openstreetmap.org/search.php?format=json&q=' + encodeURI(query)).success(function (data) {
             lunch.osmid = data[0].osm_id;
             lunch.osmtype = data[0].osm_type;
+            console.log(lunch.osmid);
+            console.log( lunch.osmtype);
+            $scope.chosenPlace = data[0].osm_type;
 
-            if (!(usedTitles.contains(lunch.lunchid))) {
-                $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osmtype).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osmid)).success(function (data) {
-                    init(data.lat, data.lon, 'map');
-                    usedTitles.push(lunch.lunchid);
-                })
-            }
+            // if (!(usedTitles.contains(lunch.lunchid))) {
+            //     $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osmtype).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osmid)).success(function (data) {
+            //         init(data.lat, data.lon, 'map');
+            //         usedTitles.push(lunch.lunchid);
+            //     })
+            // }
         });
     }
 
