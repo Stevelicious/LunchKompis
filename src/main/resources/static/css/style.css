@@ -79,6 +79,7 @@ body {
 
 .lunch-ui {
     padding: 15px;
+    padding-bottom: 15px;
     height: 100%;
     border-top: 0px solid;
 }
@@ -151,7 +152,7 @@ body {
 
     text-align: left;
     font-family: 'Lato', sans-serif;
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 900;
 }
 
@@ -229,6 +230,14 @@ body {
     height: 30%;
     float: left;
 }
+
+.tooltip-inner {
+    max-width: 150px;
+    /* If max-width does not work, try using width instead */
+    width: 150px;
+
+}
+
 
 
 /* Modal css */
@@ -448,3 +457,10 @@ body {
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
 }
+
+
+/* MOUSE HOVER START */
+
+
+
+/* STOP */

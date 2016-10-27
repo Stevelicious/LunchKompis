@@ -14,4 +14,3 @@ $.getScript('http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js'
 
 }); //script
 
-$(document).ready(function() {});
