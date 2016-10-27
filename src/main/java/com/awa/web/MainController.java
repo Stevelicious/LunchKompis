@@ -50,11 +50,16 @@ public class MainController {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
+		System.out.println("NAME:" + name);
 		for (User user : repo.getUsers()) {
-			if(user.getNickname() == name){
+			System.out.println(user.getNickname());
+
+			if(user.getNickname().equals(name)){
 				session.setAttribute("userid", user.getUserid());
+
 			}
 		}
+		System.out.println("Session: " + session.getAttribute("userid"));
 //		session.setAttribute("userid", 12);
 		return "user/index";
 	}

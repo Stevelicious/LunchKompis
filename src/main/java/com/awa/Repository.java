@@ -53,7 +53,5 @@ public interface Repository {
 
 	Map<String, ArrayList<User>> getUsersInLunch(long lunchID);
 
-
-	
 	
 }

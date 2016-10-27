@@ -102,9 +102,9 @@ public class InMemoryRepository implements Repository {
 		
 		for (Lunch lunch:
 				db.lunches) {
-			if (lunch.getUsers().containsKey(user)) {
-				lunches.add(lunch);
-			}
+//			if (lunch.getUsers().containsKey(user)) {
+//				lunches.add(lunch);
+//			}
 		}
 		return lunches;
 	}
@@ -166,10 +166,10 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		User user = getUser(userID);
 		
-		if(!lunch.getUsers().containsKey(user)){
-			lunch.setUsers(user,"Attending");
-			return 1;
-		}
+//		if(!lunch.getUsers().containsKey(user)){
+//			lunch.setUsers(user,"Attending");
+//			return 1;
+//		}
 		return 0;
 	}
 	
@@ -178,10 +178,10 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		User user = getUser(userID);
 		
-		if(lunch.getUsers().containsKey(user)){
-			lunch.getUsers().remove(user);
-			return 1;
-		}
+//		if(lunch.getUsers().containsKey(user)){
+//			lunch.getUsers().remove(user);
+//			return 1;
+//		}
 		return 0;
 	}
 	
@@ -190,10 +190,10 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		List<User> users = getUsersInGroup(groupID);
 		
-		for (User user: users) {
-			if (!lunch.getUsers().keySet().contains(user))
-			lunch.setUsers(user,"Attending");
-		}
+//		for (User user: users) {
+//			if (!lunch.getUsers().keySet().contains(user))
+//			lunch.setUsers(user,"Attending");
+//		}
 		return 1;
 	}
 }

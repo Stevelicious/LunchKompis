@@ -77,7 +77,7 @@ public class SqlServerRepository implements Repository {
 	@Override
 	public long createLunch(Lunch lunch) {
 		try (Connection conn = dataSource.getConnection();
-		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[lunch] (title, date, time, isPublic, place, host)  VALUES (?, ?, ?,?, ?, ?)")) {
+		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[lunch] (title, date, time, isPublic, place, host, osm_id, osm_type)  VALUES (?, ?, ?,?, ?, ?, ?, ?)")) {
 			
 			ps.setString(1, lunch.getTitle());
 			
@@ -86,7 +86,9 @@ public class SqlServerRepository implements Repository {
 			ps.setBoolean(4, lunch.isPublic());
 			ps.setString(5, lunch.getPlace());
 			ps.setLong(6, lunch.getHost());
-			
+			ps.setInt(7, lunch.getOsm_id());
+			ps.setString(8, lunch.getOsm_type());
+
 			int rs = ps.executeUpdate();
 			if (rs == 0) {
 				
@@ -229,7 +231,7 @@ public class SqlServerRepository implements Repository {
 	@Override
 	public List<Lunch> getPublicLunchList() {
 		try (Connection conn = dataSource.getConnection();
-		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.lunch WHERE Lunchid IN(SELECT Lunch_id FROM dbo.Connector) AND isPublic = 1; ")) {
+		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.lunch WHERE isPublic = 1; ")) {
 			
 			ResultSet rs = ps.executeQuery();
 			List<Lunch> lunchList = new ArrayList<Lunch>();
@@ -361,7 +363,7 @@ public class SqlServerRepository implements Repository {
 	@Override
 	public long addUserToLunch(long lunchID, long userID) {
 		try (Connection conn = dataSource.getConnection();
-		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[Connector] (Lunch_id, User_id, )  VALUES (?,? )")) {
+		     PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchConnector] (Lunch_id, User_id )  VALUES (?,? )")) {
 			
 			ps.setLong(1, lunchID);
 			ps.setLong(2, userID);
@@ -499,7 +501,8 @@ public class SqlServerRepository implements Repository {
 	
 	private Lunch parseLunch(ResultSet rs) throws SQLException {
 		Lunch lunch = new Lunch();
-		
+
+		lunch.setLunchid(rs.getLong("Lunchid"));
 		lunch.setTitle(rs.getString("title"));
 		lunch.setDate(rs.getDate("date").toLocalDate());
 		lunch.setTime(rs.getTime("time").toLocalTime());
@@ -507,6 +510,10 @@ public class SqlServerRepository implements Repository {
 		lunch.setPlace(rs.getString("place"));
 		lunch.setHost(rs.getLong("host"));
 		lunch.setUsers(getUsersInLunch(lunch.getLunchid()));
+
+		lunch.setOsm_id(rs.getInt("osm_id"));
+		lunch.setOsm_type(rs.getString("osm_type"));
+
 		return lunch;
 	}
 }

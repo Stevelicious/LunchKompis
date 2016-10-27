@@ -6,8 +6,21 @@ if (!lunchKompis.lunchlist)
 
 lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
     var lunch = {};
+
+    var usedTitles = [];
+    Array.prototype.contains = function (obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i] == obj) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     $scope.createLunch = function () {
-        console.log('clicked');
+        $http.post('/api/groups/new').success(function(data) {
+        });
     }
 
     $scope.doQuery = function (searchPlace) {
@@ -16,12 +29,12 @@ lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
             lunch.osmid = data[0].osm_id;
             lunch.osmtype = data[0].osm_type;
 
-            // if (!(usedTitles.contains(lunch.lunchid))) {
+            if (!(usedTitles.contains(lunch.lunchid))) {
                 $http.get('http://nominatim.openstreetmap.org/reverse?format=json&osm_type=' + encodeURI(lunch.osmtype).toUpperCase().charAt(0) + '&osm_id=' + encodeURI(lunch.osmid)).success(function (data) {
                     init(data.lat, data.lon, 'map');
-            //         usedTitles.push(lunch.lunchid);
+                    usedTitles.push(lunch.lunchid);
                 })
-            // }
+            }
         });
     }
 
