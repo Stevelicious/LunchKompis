@@ -27,8 +27,9 @@ public class DbTest {
 		
 		Lunch lunch = new Lunch();
 		lunch.setTitle("Lunch"+99);
-		lunch.setDate(LocalDate.now());
-		lunch.setTime(LocalTime.now().plusHours(99));
+		lunch.setDate(LocalDate.now().toString());
+		lunch.setTime(LocalTime.now().plusHours(99).toString()
+		);
 		lunch.setPlace("Place"+99);
 		lunch.setPublic(true);
 		

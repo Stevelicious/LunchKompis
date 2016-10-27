@@ -17,8 +17,11 @@ lunchKompis.lunchlist.AppController = function ($scope, $http, $window){
         });
         // $window.location.reload();
     };
-    $scope.createLunch = function() {
-        $http.post('/api/groups/').success(function(data) {
+    $scope.createLunch = function(title) {
+        var lunch = {
+            title: title
+        }
+        $http.post('/api/groups/', lunch).success(function(data) {
             console.log(data);
         });
     };
