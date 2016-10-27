@@ -20,25 +20,24 @@
             <div class="bottom">
                 <div class="left">
                     <button type="button" class="btn btn-primary btn-md"
-                            ng-click="showme=!showme; setLoc(lunch)">ÖPPNA!
+                            ng-click="showme=!showme; setLoc(lunch)">ÖPPNA
                     </button>
-                    <button ng-click="addToGroup(lunch)">Add me</button>
+                    <button class = "btn btn-primary btn-md" ng-click="addToGroup(lunch)">GÅ MED</button>
+                    <div class="right ">
+                        <span class="fa-stack text-primary">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
+                        </span>5
+                    </div>
                 </div>
-                <div class="right ">
 
-                    <span class="fa-stack text-primary">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
-                    </span>5
-                </div>
                 <div ng-show="showme">
-                    <div  style="height: 260px;">
+                    <div  style="height: 240px;">
                         <div ng-repeat='(key, value) in lunch.users'>
                             <span>{{key}} :</span>
                             <div ng-repeat="user in value">{{user.nickname}}</div>
                         </div>
-                        <!--<button ng-click="addToGroup(lunch)">Add me</button>-->
-                        <div style="width:192px; height:192px;" id="{{lunch.lunchid}}"></div>
+                        <div style="width:202px; height:202px;" id="{{lunch.lunchid}}"></div>
                     </div>
 
                 </div>
@@ -50,14 +49,6 @@
     <!--end-->
 
     <!--  hidden element-->
-    <!--<div ng-show="showme">-->
-        <!--<div ng-repeat='(key, value) in lunch.users'>-->
-            <!--<span>{{key}} :</span>-->
-            <!--<div ng-repeat="user in value">{{user.nickname}}</div>-->
-        <!--</div>-->
-        <!--<button ng-click="addToGroup(lunch)">Add me</button>-->
-        <!--<div style="width:500px; height:300px" id="{{lunch.lunchid}}"></div>-->
-    <!--</div>-->
     <!--hidden element-->
 
 </div>

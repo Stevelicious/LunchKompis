@@ -68,7 +68,7 @@ body {
 }
 
 .lunch-ui-wrap {
-    width: 222px;
+    width: 232px;
     height: auto;
     margin: 4% auto;
     overflow: hidden;
@@ -121,14 +121,13 @@ body {
 
 .left {
     float: left;
-    background: yellow;
 }
 
 .right {
     display: inline-block;
     text-align: right;
     font-family: 'Lato', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 900;
     color: black;
     float: right;
