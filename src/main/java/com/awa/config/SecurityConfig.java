@@ -15,7 +15,6 @@
  */
 package com.awa.config;
 
-import com.awa.InMemoryRepository;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,9 +30,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	InMemoryRepository repo;
 	
 	@Autowired
 	DataSource dataSource;

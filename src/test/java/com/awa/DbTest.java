@@ -1,3 +1,4 @@
+/*
 package com.awa;
 
 import com.awa.tables.Lunch;
@@ -6,9 +7,11 @@ import com.awa.tables.User;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+*/
 /**
  * Created by Steven Hu on 2016-10-19.
- */
+ *//*
+
 public class DbTest {
 	public static void main(String[] args) {
 		
@@ -44,3 +47,4 @@ public class DbTest {
 		
 	}
 }
+*/

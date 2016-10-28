@@ -1,6 +1,6 @@
 package com.awa.web;
 
-import com.awa.InMemoryRepository;
+
 import com.awa.SqlServerRepository;
 import com.awa.tables.Lunch;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,8 +26,6 @@ import java.util.*;
 public class LunchGroupApiController {
 
     @Autowired
-    InMemoryRepository repo;
-    @Autowired
     SqlServerRepository sqlRepo;
 
     ObjectMapper mapper = new ObjectMapper();
@@ -50,13 +48,15 @@ public class LunchGroupApiController {
     }
 
     @PostMapping("/api/groups/new")
-    public String createLunchInDb(@RequestBody Lunch lunch) throws IOException {
+    public String createLunchInDb(HttpSession session, @RequestBody Lunch lunch) throws IOException {
 
+        lunch.setHost(Long.parseLong(session.getAttribute("userid").toString()));
+        lunch.setDate(lunch.getDate().toString());
 
-
-
-        return "Sucess";
-       }
+        System.out.println(lunch.toString());
+        sqlRepo.createLunch(lunch);
+        return "{}";
+    }
 
     @GetMapping("/api/groups/{id}")
 

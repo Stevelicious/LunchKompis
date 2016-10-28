@@ -1,3 +1,4 @@
+/*
 package com.awa;
 
 
@@ -10,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * Created by Steven Hu on 2016-10-18.
- */
-@Component
+ *//*
+
+//@Component
 public class InMemoryRepository implements Repository {
 	
 	
@@ -203,3 +206,4 @@ public class InMemoryRepository implements Repository {
 		return 1;
 	}
 }
+*/

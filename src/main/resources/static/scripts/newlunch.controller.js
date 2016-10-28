@@ -8,6 +8,7 @@ lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
     var lunch = {};
     $scope.lunchtitle = "";
     $scope.place = "";
+    $scope.date = "";
 
     $scope.chosenPlace = "";
     $scope.checkboxmodel = {
@@ -32,21 +33,25 @@ lunchKompis.lunchlist.NewLunchController = function ($scope, $http) {
 
     $scope.createLunch = function (lunchtitle, place) {
         var data = {};
-        // data.lunchid = 1;
-        data.title = $scope.lunchtitle;
-        data.date = '2016-10-25'
+        data.lunchid = 1;
+        data.title = lunchtitle;
+        data.date =  new Date($scope.date).toISOString();
         data.time = '13:00'
         data.public = $scope.checkboxmodel.value,
-        data.place = $scope.place;
+        data.place = place;
         data.host = 1;
         data.osm_type = lunch.osmtype;
         data.osm_id = lunch.osmid;
 
-        console.log($scope.lunchtitle);
-        console.log($scope.place);
-        console.log($scope.checkboxmodel.value);
-        console.log(lunch.osmid);
-        console.log( lunch.osmtype);
+        console.log(data.lunchid);
+        console.log(data.title);
+        console.log(data.date);
+        console.log(data.time);
+        console.log(data.public);
+        console.log(data.place);
+        console.log(data.host);
+        console.log(data.osm_type);
+        console.log(data.osm_id)
 
         $http.post('/api/groups/new', data).success(function (data) {
             console.log(data)

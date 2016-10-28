@@ -2,10 +2,15 @@ package com.awa.tables;
 
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +34,7 @@ public class Lunch {
 	String place;
 	long host;
 
+
 	@Transient
 	Map<String, ArrayList<User>> users = new HashMap<>();
 
@@ -48,15 +54,17 @@ public class Lunch {
 	}
 
 	public void setOsm_type(String osm_type) {
-		this.osm_type = osm_type;
+		if (osm_type!=null){
+			this.osm_type = osm_type.toUpperCase().charAt(0) + "";
+		}
 	}
 
 	public int getOsm_id() {
 		return osm_id;
 	}
 
-	public void setOsm_id(int osm_id) {
-		this.osm_id = osm_id;
+	public void setOsm_id(String osm_id) {
+		this.osm_id = Integer.parseInt(osm_id);
 	}
 	
 	public long getLunchid() {
@@ -76,7 +84,17 @@ public class Lunch {
 	}
 	
 	public void setDate(String date) {
-		LocalDate localDate = LocalDate.parse(date);
+		String[] split = date.split("T");
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd YYYY");
+		LocalDate localDate = LocalDate.parse(split[0]);
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		Date parsed = null;
+//		try {
+//			parsed = format.parse(date);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		LocalDate localDate = parsed.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		this.date = localDate;
 	}
 	

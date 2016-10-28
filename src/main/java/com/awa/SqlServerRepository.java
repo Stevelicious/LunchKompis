@@ -513,7 +513,7 @@ public class SqlServerRepository implements Repository {
 		lunch.setHost(rs.getLong("host"));
 		lunch.setUsers(getUsersInLunch(lunch.getLunchid()));
 
-		lunch.setOsm_id(rs.getInt("osm_id"));
+		lunch.setOsm_id(rs.getInt("osm_id") + "");
 		lunch.setOsm_type(rs.getString("osm_type"));
 
 		return lunch;
