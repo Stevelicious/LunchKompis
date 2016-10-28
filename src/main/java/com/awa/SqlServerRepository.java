@@ -231,7 +231,7 @@ public class SqlServerRepository implements Repository {
 	@Override
 	public List<Lunch> getPublicLunchList() {
 		try (Connection conn = dataSource.getConnection();
-		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.lunch WHERE isPublic = 1; ")) {
+		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM dbo.lunch WHERE isPublic = 1 ORDER BY date asc, time asc; ")) {
 			
 			ResultSet rs = ps.executeQuery();
 			List<Lunch> lunchList = new ArrayList<Lunch>();
