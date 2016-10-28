@@ -7,7 +7,6 @@ angular.module('lunchKompis', ['ngRoute', 'lunchKompis.lunchlist', 'lunchKompis.
                 controllerAs: "vm"
             })
             .when('/newlunch', {
-                templateUrl: "../../scripts/new-lunch.template.html",
                 controller: 'newLunchCtrl'
             });
 
