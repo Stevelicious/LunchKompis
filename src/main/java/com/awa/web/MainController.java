@@ -15,16 +15,24 @@
  */
 package com.awa.web;
 
+
+import com.awa.SqlServerRepository;
+import com.awa.tables.User;
 import com.awa.validation.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * @author Joe Grandja
- */
+import javax.servlet.http.HttpSession;
+
+
 @Controller
 public class MainController {
+	@Autowired
+	SqlServerRepository repo;
 
 /*	@RequestMapping("/")
 	public String root() {
@@ -37,8 +45,21 @@ public class MainController {
 	}*/
 
 	@RequestMapping("/user/")
-	public String userIndex() {
+	public String userIndex(HttpSession session) {
 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName();
+		System.out.println("NAME:" + name);
+		for (User user : repo.getUsers()) {
+			System.out.println(user.getNickname());
+
+			if(user.getNickname().equals(name)){
+				session.setAttribute("userid", user.getUserid());
+
+			}
+		}
+		System.out.println("Session: " + session.getAttribute("userid"));
+//		session.setAttribute("userid", 12);
 		return "user/index";
 	}
 

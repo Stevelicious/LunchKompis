@@ -31,3 +31,4 @@ nbdist/
 
 ### Spring ###
 application.properties
+sqljdbc_auth.dll

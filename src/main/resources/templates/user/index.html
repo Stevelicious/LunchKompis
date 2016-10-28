@@ -1,35 +1,206 @@
 <!DOCTYPE html>
-<html ng-app="lunchApp" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html ng-app="lunchKompis" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Hello Spring Security</title>
+    <title>Lunchkompis</title>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}"/>
+
+    <link rel="stylesheet" href="../css/normalize.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/style-user-index-navbar.css"/>
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css'/>
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css'/>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.3.0/balloon.min.css"/>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css'/>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'/>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'/>
+
 </head>
 
 <body>
-<div th:substituteby="index::logout"></div>
-<h1>This is a secured page!</h1>
 
-<div ng-controller="groupCtrl">
-    <div ng-repeat="lunch in lunchgroups" ng-click="showme=!showme">{{lunch.title}}
-        <div ng-show="showme"> {{lunch.date}} {{lunch.time}} {{lunch.isPublic}} {{lunch.place}} {{lunch.users}}
-            <button ng-click="addToGroup(lunch)">Add me</button>
+<nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img src="/img/lunchkompisloggo.png" alt="lunchlogga"/>
         </div>
+        <div class="navbar-collapse collapse navbar-right">
+
+            <ul class="nav navbar-nav">
+
+                <li class="hover"><a href="#">KONTAKTA OSS</a></li>
+
+                <li><a href="#">KONTO</a></li>
+                <li><a href="#/">LUNCHER</a></li>
+                <li><a href="/lout">LOGGA UT</a></li>
+            </ul>
+
+        </div>
+
     </div>
-    <div>
-        {{activeGroup}}
+</nav>
+
+<!-- NAVBAR Stop -->
+
+<div class="ng-view"></div>
+
+<div class="plusmenu">
+    <!--<a href="#/newlunch">-->
+    <button type="button" class="btn btn-primary btn-circle btn-xl" data-toggle="modal"
+            data-target="#myModalHorizontal">
+        <i class="fa fa-plus fa-lg"></i>
+    </button>
+    <!--</a>-->
+</div>
+<!-- Modal -->
+<div ng-controller="newLunchCtrl" class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Stäng</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Skapa Lunch!
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form" action="post">
+                    <div class="form-group col-sm-10">
+                        <label class="col-sm-2 control-label" for="rubrik">Rubrik till din lunch</label>
+
+                        <input ng-model="lunchtitle" type="text" class="form-control" id="rubrik" placeholder="Rubrik"/>
+                    </div>
+
+
+                    <!-- End titel -->
+                    <div class="form-group col-sm-10">
+                        <div id="custom-search-input">
+                            <label class="col-sm-2 control-label" for="search">Vart ska ni äta?</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control input-sm" ng-model="searchPlace"
+                                       name="search" id="search" placeholder="Sök efter resturang"/>
+                                <span class="input-group-btn">
+                            <button class="btn btn-info" type="button" ng-click="doQuery(searchPlace, lunch)">
+                                <i class="fa fa-search fa-xl"></i>
+                            </button>
+                        </span>
+                            </div>
+                        </div>
+                        <div>Vald restaurang: {{chosenPlace}}</div>
+                    </div>
+
+                    <!--Datum & Tid-->
+
+                    <div class="form-group col-sm-10">
+                        <label class="col-sm-2 control-label" for="duedate">Vilket datum?</label>
+                        <input class="form-control" ng-model="date" type="datetime-local" id="duedate"/>
+                    </div>
+
+                    <!--<div class="form-group col-sm-8">-->
+                    <!--<div class="form-group">-->
+                    <!--<div class='input-group date' id='datetimepicker1'>-->
+                    <!--<input type='text' class="form-control"/>-->
+                    <!--<span class="input-group-addon">-->
+                    <!--<span class="glyphicon glyphicon-calendar"></span>-->
+                    <!--</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!-- Grupper -->
+
+
+                    <!--                    <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   for="grupper">Välj vilka som ska se ditt lunchförslag</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" name="grupper" id="grupper" multiple="multiple">
+                                                    <option value="1">Academy Java</option>
+                                                    <option value="2">Academy C#.What</option>
+                                                    <option value="3">Paradise Hotel</option>
+
+                                                </select>
+                                            </div>
+
+                                        </div>-->
+                    <!-- knapp för grupper -->
+                    <div class="form-group col-sm-10">
+                        <label class="col-sm-2 control-label"
+                               for="public">Synligt endast för valda grupper</label>
+
+                        <div class="col-sm-10 ">
+                            <!--<input type="checkbox"  id="public" name="my-checkbox" checkbox="checked"/>-->
+                            <input type="checkbox" class="checkbox checkbox-primary" id="public"
+                                   ng-model="checkboxmodel.value"/>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <a href="#/">
+                            <button ng-click="clickme()" type="button" class="btn btn-default"
+                                    data-dismiss="modal">
+                                Stäng
+                            </button>
+                        </a>
+                        <button type="button" ng-click="createLunch(lunchtitle, searchPlace)" class="btn btn-primary" data-dismiss="modal">
+                            Skapa Lunch
+                        </button>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+
     </div>
 </div>
 
-
-
-<div ng-controller="mapCtrl"></div>
-<p><a href="/index" th:href="@{/index}">Back to home page</a></p>
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js'></script>
+<script src="/js/main.js"></script>
+<script src="/js/index.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-<script src="/scripts/app.controller.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="/scripts/OpenLayers.js"></script>
+<script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+
+<script src="/scripts/lunchlist.controller.js"></script>
+<script src="/scripts/map.controller.js"></script>
+<script src="/scripts/newlunch.controller.js"></script>
+<script src="/scripts/lunchlist.directive.js"></script>
+<script src="/scripts/newlunch.module.js"></script>
+<script src="/scripts/lunchlist.module.js"></script>
+
 <script src="/scripts/app.js"></script>
+
 </body>
 
 </html>

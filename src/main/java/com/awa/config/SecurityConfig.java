@@ -15,45 +15,69 @@
  */
 package com.awa.config;
 
+import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author Joe Grandja
  */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+	
+	@Autowired
+	DataSource dataSource;
+	
 	// @formatter:off
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-					// .antMatchers("/**").permitAll()	// ingen säkerhet
-					.antMatchers("/css/**", "/").permitAll() //utkomenterad vid utveckling
-					.antMatchers("/user/**").hasRole("USER")
-					.and()
+				// .antMatchers("/**").permitAll()	// ingen säkerhet
+				.antMatchers("/css/**", "/").permitAll() //utkomenterad vid utveckling
+				.antMatchers("/user/**").hasAuthority("USER")
+				.and()
 				.formLogin()
-				.loginPage("/login")
+				.loginPage("/")
 				.defaultSuccessUrl("/user/")
 				.failureUrl("/login-error");
+		http
+				.logout()
+				.logoutUrl("/logout").permitAll()
+				.logoutSuccessUrl("/")
+				.invalidateHttpSession(true);
+		
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
 	// @formatter:on
-
+	
 	// @formatter:off
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-			.inMemoryAuthentication()
-				.withUser("user").password("password").roles("USER");
-		auth
 				.inMemoryAuthentication()
-				.withUser("mohed").password("password").roles("USER");
+				.withUser("user").password("password").authorities("USER");
+		
+		auth.
+				jdbcAuthentication().dataSource(dataSource)
+				.passwordEncoder(passwordEncoder())
+				.usersByUsernameQuery(
+						"select username,password, status from users where username=?")
+				.authoritiesByUsernameQuery(
+						"select users.username, userRoles.role from userRoles inner join users on users.userid=userRoles.user_id where users.username=?");
 	}
 	// @formatter:on
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
+	}
+	
 }

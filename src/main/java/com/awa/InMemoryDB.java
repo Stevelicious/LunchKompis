@@ -1,14 +1,22 @@
+/*
 package com.awa;
 
+import com.awa.tables.Lunch;
+import com.awa.tables.User;
+import com.awa.tables.UserGroup;
+
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by Steven Hu on 2016-10-18.
- */
+ *//*
+
 public class InMemoryDB {
 	public List<User> users = new ArrayList<>();
 	public List<Lunch> lunches = new ArrayList<>();
@@ -30,14 +38,15 @@ public class InMemoryDB {
 		for (int i = 0; i < 5; i++) {
 			Lunch lunch = new Lunch();
 			lunch.setTitle("Lunch"+i);
-			lunch.setDate(LocalDate.now());
-			lunch.setTime(LocalTime.now().plusHours(i));
+			lunch.setDate(LocalDate.now().toString());
+			lunch.setTime(LocalTime.now().plusHours(i).toString());
 			lunch.setPlace("Place"+i);
 			lunch.setPublic(true);
-			for (int j = 1; j < i + 2; j++) {
-				lunch.setUsers(users.get(j), "Attending");
-			}
-			
+//			for (int j = 1; j < i + 2; j++) {
+//				lunch.setUsers(users.get(j), "Attending");
+//				lunch.setUsers(users.get(j), "Invited");
+//			}
+			lunch.setHost(i+1);
 			lunches.add(lunch);
 		}
 		
@@ -47,7 +56,9 @@ public class InMemoryDB {
 			group.setCreationdate(LocalDateTime.now());
 			group.setPerm(true);
 			group.setUsers(users.subList(i,i+3));
+			group.setAdmin(i+1);
 			groupes.add(group);
 		}
 	}
 }
+*/

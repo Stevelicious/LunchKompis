@@ -1,15 +1,22 @@
+/*
 package com.awa;
 
 
+import com.awa.tables.Lunch;
+import com.awa.tables.User;
+import com.awa.tables.UserGroup;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+*/
 /**
  * Created by Steven Hu on 2016-10-18.
- */
-@Component
+ *//*
+
+//@Component
 public class InMemoryRepository implements Repository {
 	
 	
@@ -60,7 +67,12 @@ public class InMemoryRepository implements Repository {
 		}
 		return null;
 	}
-	
+
+	@Override
+	public Map<String, ArrayList<User>> getUsersInLunch(long lunchID) {
+		return null;
+	}
+
 	@Override
 	public List<User> getUsersInGroup(long groupID) {
 		return getGroup(groupID).getUsers();
@@ -85,7 +97,7 @@ public class InMemoryRepository implements Repository {
 		
 		for (UserGroup group :
 				db.groupes) {
-			if (group.users.contains(user)) {
+			if (group.getUsers().contains(user)) {
 				groups.add(group);
 			}
 		}
@@ -99,9 +111,9 @@ public class InMemoryRepository implements Repository {
 		
 		for (Lunch lunch:
 				db.lunches) {
-			if (lunch.users.containsKey(user)) {
-				lunches.add(lunch);
-			}
+//			if (lunch.getUsers().containsKey(user)) {
+//				lunches.add(lunch);
+//			}
 		}
 		return lunches;
 	}
@@ -112,7 +124,7 @@ public class InMemoryRepository implements Repository {
 		
 		for (Lunch lunch:
 				db.lunches) {
-			if (lunch.isPublic) {
+			if (lunch.isPublic()) {
 				lunches.add(lunch);
 			}
 		}
@@ -163,10 +175,10 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		User user = getUser(userID);
 		
-		if(!lunch.users.containsKey(user)){
-			lunch.setUsers(user,"Attending");
-			return 1;
-		}
+//		if(!lunch.getUsers().containsKey(user)){
+//			lunch.setUsers(user,"Attending");
+//			return 1;
+//		}
 		return 0;
 	}
 	
@@ -175,10 +187,10 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		User user = getUser(userID);
 		
-		if(lunch.users.containsKey(user)){
-			lunch.users.remove(user);
-			return 1;
-		}
+//		if(lunch.getUsers().containsKey(user)){
+//			lunch.getUsers().remove(user);
+//			return 1;
+//		}
 		return 0;
 	}
 	
@@ -187,10 +199,11 @@ public class InMemoryRepository implements Repository {
 		Lunch lunch = getLunch(lunchID);
 		List<User> users = getUsersInGroup(groupID);
 		
-		for (User user: users) {
-			if (!lunch.getUsers().keySet().contains(user))
-			lunch.setUsers(user,"Attending");
-		}
+//		for (User user: users) {
+//			if (!lunch.getUsers().keySet().contains(user))
+//			lunch.setUsers(user,"Attending");
+//		}
 		return 1;
 	}
 }
+*/

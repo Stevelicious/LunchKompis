@@ -1,4 +1,4 @@
-package com.awa;
+package com.awa.tables;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,6 +23,15 @@ public class UserGroup {
 	List<User> users = new ArrayList<>();
 	LocalDateTime creationdate;
 	boolean isPerm;
+	long admin;
+	
+	public long getAdmin() {
+		return admin;
+	}
+	
+	public void setAdmin(long admin) {
+		this.admin = admin;
+	}
 	
 	public UserGroup() {
 		usergroupid = ++count;
@@ -53,6 +62,8 @@ public class UserGroup {
 	}
 	
 	public void setCreationdate(LocalDateTime creationdate) {
+
+
 		this.creationdate = creationdate;
 	}
 	

@@ -1,12 +1,13 @@
-package com.awa;
+package com.awa.tables;
 
 import javax.persistence.*;
 import java.util.Date;
 
 
+
 //@Entity
 //@Table
-public class User {
+public class User{
 	
 	private static int count = 0;
 
@@ -22,11 +23,9 @@ public class User {
     private Date creation_date;
 
     public User() {
-	    userid = ++count;
     }
 
     public User(String firstname, String lastname, String email, String nickname, String password) {
-	    userid = ++count;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -41,6 +40,8 @@ public class User {
     public long getUserid() {
         return userid;
     }
+
+
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
@@ -106,15 +107,18 @@ public class User {
         this.creation_date = creation_date;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
-                "userid = " + userid +
-                ", firstname = '" + firstname +
-                "', lastname = '" + lastname +
-                "', email = '" + email +
-                "', nickname = '" + nickname +
-                "', password = '" + password +
-                "'}\n";
+                "userid " + userid +
+                "firstname" + firstname +
+                "lastname" + lastname+
+                "email" + email+
+                "nickname" + nickname+
+                "password" + password+
+                "state" + state +
+                "creation_date" + creation_date +
+                '}';
     }
 }

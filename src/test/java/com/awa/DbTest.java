@@ -1,13 +1,20 @@
+/*
 package com.awa;
+
+import com.awa.tables.Lunch;
+import com.awa.tables.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+*/
 /**
  * Created by Steven Hu on 2016-10-19.
- */
+ *//*
+
 public class DbTest {
 	public static void main(String[] args) {
+		
 		Repository repo = new InMemoryRepository();
 		System.out.println(repo.getLunch(3));
 		
@@ -23,8 +30,8 @@ public class DbTest {
 		
 		Lunch lunch = new Lunch();
 		lunch.setTitle("Lunch"+99);
-		lunch.setDate(LocalDate.now());
-		lunch.setTime(LocalTime.now().plusHours(99));
+		lunch.setDate(LocalDate.now().toString());
+		lunch.setTime(LocalTime.now().plusHours(99).toString());
 		lunch.setPlace("Place"+99);
 		lunch.setPublic(true);
 		
@@ -40,3 +47,4 @@ public class DbTest {
 		
 	}
 }
+*/
